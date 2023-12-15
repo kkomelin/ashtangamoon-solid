@@ -1,0 +1,39 @@
+#moon {
+  clear: both;
+  background: #193d61;
+}
+
+.current-date {
+  color: #9de7fa;
+  font-weight: bold;
+  text-align: center;
+}
+
+.next-dates {
+  color: #ffffff;
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+@media only screen and (min-width: 500px) {
+  .next-dates {
+    flex-direction: row;
+    gap: 3rem;
+  }
+}
+
+.next-dates .moon-phase {
+  text-align: center;
+  margin-bottom: 0.8rem;
+  color: #9de7fa;
+  font-weight: bold;
+}
+
+.next-dates .moon-phase .title {
+  font-size: 18px;
+  color: #ffffff;
+  font-weight: normal;
+  margin-bottom: 0.1rem;
+}
