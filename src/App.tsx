@@ -1,4 +1,4 @@
-import { createSignal, onMount } from 'solid-js'
+import { createSignal, onCleanup, onMount } from 'solid-js'
 import './App.css'
 import calculateMoonPhases from './core/calculateMoonPhases'
 import { currentDate, formatMoonDate } from './core/utils'
@@ -12,9 +12,11 @@ interface IMoonDate {
 function App() {
   const [cDate, setCDate] = createSignal<string>(currentDate())
   const [dates, setDates] = createSignal<IMoonDate[]>([])
+  const [loading, setLoading] = createSignal<boolean>(true)
   let moonRef!: SVGSVGElement
+  let renderInterval: NodeJS.Timeout
 
-  const render = () => {
+  const refresh = () => {
     setCDate(currentDate())
     // Calculate moon phases.
     const { currentPhase, newMoon, fullMoon, nextFullMoon, nextNewMoon } =
@@ -35,11 +37,32 @@ function App() {
 
     setDates(dateArr)
 
+    setLoading(false)
+
     // Visualize the moon.
     visualizeMoonPhase(moonRef, currentPhase)
   }
 
-  onMount(render)
+  onMount(() => {
+    refresh()
+
+    // Re-render page regularly.
+    renderInterval = setInterval(
+      () => {
+        // Check whether the app has focus.
+        if (!window.document.hasFocus()) {
+          return
+        }
+
+        refresh()
+      },
+      1 * 60 * 1000
+    ) // once a minute
+  })
+
+  onCleanup(() => {
+    clearInterval(renderInterval)
+  })
 
   return (
     <>
@@ -48,7 +71,10 @@ function App() {
         <div class="current-date">{cDate()}</div>
       </header>
 
+      {loading() && <div class="loader">Loading...</div>}
+
       <svg id="moon" ref={moonRef} />
+
       <div class="next-dates">
         {dates().map((moonDate: IMoonDate) => (
           <div class="moon-phase">

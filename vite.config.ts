@@ -1,6 +1,62 @@
 import { defineConfig } from 'vite'
+import type { VitePWAOptions } from 'vite-plugin-pwa'
+import { VitePWA } from 'vite-plugin-pwa'
 import solid from 'vite-plugin-solid'
 
+const pwaOptions: Partial<VitePWAOptions> = {
+  base: '/',
+  includeAssets: [
+    'img/apple-touch-icon.png',
+    'img/favicon-16x16.png',
+    'img/favicon-32x32.png',
+    'img/favicon.ico',
+  ],
+  manifest: {
+    id: '/?utm_source=pwa',
+    start_url: '/?utm_source=pwa',
+    name: 'Ashtanga Moon - Track new and full moon days',
+    short_name: 'Ashtanga Moon',
+    description:
+      'Displays next full and new moon dates and visualizes current moon phase',
+    background_color: '#193d61',
+    theme_color: '#193d61',
+    icons: [
+      {
+        src: 'img/large-icon.png',
+        sizes: '1024x1024',
+      },
+      {
+        src: 'img/large-icon.png',
+        sizes: '1024x1024',
+        purpose: 'maskable',
+      },
+    ],
+    screenshots: [
+      {
+        src: 'img/large-icon.png',
+        sizes: '1024x1024',
+        form_factor: 'wide',
+      },
+      {
+        src: 'img/large-icon.png',
+        sizes: '1024x1024',
+      },
+    ],
+  },
+  useCredentials: true,
+  strategies: 'injectManifest',
+  srcDir: 'src',
+  filename: 'sw.ts',
+  registerType: 'autoUpdate',
+  selfDestroying: false,
+  devOptions: {
+    enabled: process.env.NODE_ENV === 'development',
+    /* when using generateSW the PWA plugin will switch to classic */
+    type: 'module',
+    navigateFallback: 'index.html',
+  },
+}
+
 export default defineConfig({
-  plugins: [solid()],
+  plugins: [solid(), VitePWA(pwaOptions)],
 })
