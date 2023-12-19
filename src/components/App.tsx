@@ -23,7 +23,7 @@ function App() {
     const { currentPhase, newMoon, fullMoon, nextNewMoon } =
       calculateMoonPhases()
 
-    setCurrentPhase(currentPhase * Math.random())
+    setCurrentPhase(currentPhase)
 
     const dateArr = [
       { title: 'New Moon', date: formatMoonDate(newMoon) },
