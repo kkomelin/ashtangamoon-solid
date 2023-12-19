@@ -37,7 +37,8 @@ function App() {
   onMount(() => {
     refresh()
 
-    renderInterval = setInterval(refresh, 1 * 60 * 1000) // once a minute
+    // Refresh once a minute.
+    renderInterval = setInterval(refresh, 1 * 60 * 1000) 
   })
 
   createEffect(() => {
