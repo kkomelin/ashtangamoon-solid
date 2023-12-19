@@ -14,7 +14,7 @@ const pwaOptions: Partial<VitePWAOptions> = {
   manifest: {
     id: '/?utm_source=pwa',
     start_url: '/?utm_source=pwa',
-    name: 'Ashtanga Moon - Track new and full moon days',
+    name: 'Ashtanga Moon',
     short_name: 'Ashtanga Moon',
     description:
       'Displays next full and new moon dates and visualizes current moon phase',
@@ -22,24 +22,25 @@ const pwaOptions: Partial<VitePWAOptions> = {
     theme_color: '#193d61',
     icons: [
       {
-        src: 'img/large-icon.png',
-        sizes: '1024x1024',
+        src: '/img/android-chrome-192x192.png',
+        sizes: '192x192',
+        type: 'image/png',
       },
       {
-        src: 'img/large-icon.png',
-        sizes: '1024x1024',
-        purpose: 'maskable',
+        src: '/img/android-chrome-512x512.png',
+        sizes: '512x512',
+        type: 'image/png',
       },
     ],
     screenshots: [
       {
-        src: 'img/large-icon.png',
-        sizes: '1024x1024',
+        src: 'img/screenshot-wide.png',
+        sizes: '3200x1600',
         form_factor: 'wide',
       },
       {
-        src: 'img/large-icon.png',
-        sizes: '1024x1024',
+        src: 'img/screenshot.png',
+        sizes: '1200x1200',
       },
     ],
   },

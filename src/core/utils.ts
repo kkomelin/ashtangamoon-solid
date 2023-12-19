@@ -1,6 +1,6 @@
 import { format } from 'date-fns'
 
-export const currentDate = (): string => {
+export const currentDateFormatted = (): string => {
   return format(new Date(), 'd MMM yyyy')
 }
 
