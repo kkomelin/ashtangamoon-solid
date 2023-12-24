@@ -1,6 +1,7 @@
 import { Index, createEffect, createSignal, onCleanup, onMount } from 'solid-js'
 import calculateMoonPhases from '../core/calculateMoonPhases'
 import { APP_NAME } from '../core/config'
+import { requestPermission } from '../core/firebase/registration'
 import { currentDateFormatted, formatMoonDate } from '../core/utils'
 import visualizeMoonPhase from '../core/visualizeMoonPhase'
 import { IMoonDate } from '../types/IMoonDate'
@@ -39,6 +40,8 @@ function App() {
 
     // Refresh once a minute.
     renderInterval = setInterval(refresh, 1 * 60 * 1000) 
+
+    requestPermission()
   })
 
   createEffect(() => {
