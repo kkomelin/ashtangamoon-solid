@@ -1,5 +1,5 @@
 import { getMessaging } from 'firebase/messaging'
-import app from './init'
+import app from '../init'
 
 const messaging = getMessaging(app)
 

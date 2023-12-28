@@ -1,6 +1,15 @@
-import { Index, createEffect, createSignal, onCleanup, onMount } from 'solid-js'
+import { UserCredential } from '@firebase/auth'
+import {
+  Index,
+  Show,
+  createEffect,
+  createSignal,
+  onCleanup,
+  onMount,
+} from 'solid-js'
 import calculateMoonPhases from '../core/calculateMoonPhases'
 import { APP_NAME } from '../core/config'
+import { authSignIn, authSignOut } from '../core/firebase/auth/utils'
 import { requestPermission } from '../core/firebase/registration'
 import { currentDateFormatted, formatMoonDate } from '../core/utils'
 import visualizeMoonPhase from '../core/visualizeMoonPhase'
@@ -14,6 +23,7 @@ function App() {
   )
   const [dates, setDates] = createSignal<IMoonDate[]>([])
   const [currentPhase, setCurrentPhase] = createSignal<number>()
+  const [user, setUser] = createSignal<UserCredential>()
 
   let moonRef!: SVGSVGElement
   let renderInterval: NodeJS.Timeout
@@ -39,7 +49,7 @@ function App() {
     refresh()
 
     // Refresh once a minute.
-    renderInterval = setInterval(refresh, 1 * 60 * 1000) 
+    renderInterval = setInterval(refresh, 1 * 60 * 1000)
 
     requestPermission()
   })
@@ -56,8 +66,37 @@ function App() {
     clearInterval(renderInterval)
   })
 
+  const handleSignInClick = async (e: any) => {
+    e.preventDefault()
+    try {
+      const user = await authSignIn()
+      setUser(user)
+    } catch (e) {
+      console.error(e)
+    }
+  }
+
+  const handleSignOutClick = async (e: any) => {
+    e.preventDefault()
+    try {
+      await authSignOut()
+      setUser()
+    } catch (e) {
+      console.error(e)
+    }
+  }
+
   return (
     <>
+      <Show
+        when={user()}
+        fallback={<button onClick={handleSignInClick}>Sign In</button>}
+      >
+        <button onClick={handleSignOutClick}>
+          Sign Out as {user()?.user.displayName}
+        </button>
+      </Show>
+
       <header>
         <h1>{APP_NAME}</h1>
         <div class="current-date">{currentDate()}</div>

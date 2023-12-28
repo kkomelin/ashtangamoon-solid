@@ -1,6 +1,6 @@
 import { getToken } from 'firebase/messaging'
 import { PUBLIC_VAPID_KEY } from '../config'
-import messaging from './messaging'
+import messaging from './messaging/init'
 
 export function requestPermission() {
   console.log('Requesting permission...')
