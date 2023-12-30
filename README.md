@@ -1,36 +1,25 @@
 # Ashtanga Moon
 
-A simple PWA app with Workbox, D3 and Webpack which allows to keep track of new and full moon days and visualizes current moon phase.
+A simple PWA app with Solid.js, Workbox, D3 and Vite which allows to keep track of new and full moon days and visualizes current moon phase.
 
 New and full moon days are used in Ashtanga Vinyasa Yoga for taking rest and fasting.
 
 [Check it out](https://ashtangamoon.org)
 
-## Usage
+## Install
 
 ```bash
-$ npm install # or pnpm install or yarn install
+npm i
 ```
 
-### Learn more on the [Solid Website](https://solidjs.com) and come chat with us on our [Discord](https://discord.com/invite/solidjs)
+## Develop
 
-## Available Scripts
+```bash
+npm run dev
+```
 
-In the project directory, you can run:
+## Build
 
-### `npm run dev`
-
-Runs the app in the development mode.<br>
-Open [http://localhost:5173](http://localhost:5173) to view it in the browser.
-
-### `npm run build`
-
-Builds the app for production to the `dist` folder.<br>
-It correctly bundles Solid in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
-
-## Deployment
-
-Learn more about deploying your application with the [documentations](https://vitejs.dev/guide/static-deploy.html)
+```bash
+npm run build
+```
