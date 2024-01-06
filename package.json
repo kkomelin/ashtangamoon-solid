@@ -6,28 +6,30 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
+    "build:watch": "tsc && PWA_DISABLE=true vite build --watch",
     "preview": "vite preview",
     "format": "prettier --write .",
-    "serve": "npm run build && firebase emulators:start"
+    "emulators": "firebase emulators:start"
   },
   "dependencies": {
     "d3": "^7.8.5",
     "date-fns": "^2.30.0",
     "firebase": "^10.7.1",
     "lune": "^0.4.0",
-    "solid-js": "^1.8.5"
+    "solid-js": "^1.8.5",
+    "solid-toast": "^0.5.0"
   },
   "devDependencies": {
     "@types/d3": "^7.4.3",
     "prettier": "^3.1.0",
     "typescript": "^5.2.2",
     "vite": "^5.0.0",
+    "vite-plugin-minify": "^1.5.2",
     "vite-plugin-pwa": "^0.17.4",
     "vite-plugin-solid": "^2.7.2",
     "workbox-core": "^7.0.0",
     "workbox-precaching": "^7.0.0",
-    "workbox-window": "^7.0.0",
-    "vite-plugin-minify": "^1.5.2"
+    "workbox-window": "^7.0.0"
   },
   "keywords": [
     "pwa",

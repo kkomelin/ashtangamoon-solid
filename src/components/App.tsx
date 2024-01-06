@@ -7,11 +7,13 @@ import {
   onCleanup,
   onMount,
 } from 'solid-js'
+import { Toaster } from 'solid-toast'
 import calculateMoonPhases from '../core/calculateMoonPhases'
 import { APP_NAME } from '../core/config'
 import { authSignIn, authSignOut } from '../core/firebase/auth/utils'
-import { requestPermission } from '../core/firebase/registration'
-import { currentDateFormatted, formatMoonDate } from '../core/utils'
+import { getMessagingToken } from '../core/firebase/registration'
+import { error } from '../core/utils/errors'
+import { currentDateFormatted, formatMoonDate } from '../core/utils/main'
 import visualizeMoonPhase from '../core/visualizeMoonPhase'
 import { IMoonDate } from '../types/IMoonDate'
 import './App.css'
@@ -50,8 +52,6 @@ function App() {
 
     // Refresh once a minute.
     renderInterval = setInterval(refresh, 1 * 60 * 1000)
-
-    requestPermission()
   })
 
   createEffect(() => {
@@ -72,7 +72,7 @@ function App() {
       const user = await authSignIn()
       setUser(user)
     } catch (e) {
-      console.error(e)
+      error(e, 'Cannot login at the moment. Please try again.')
     }
   }
 
@@ -82,25 +82,40 @@ function App() {
       await authSignOut()
       setUser()
     } catch (e) {
-      console.error(e)
+      error(e, 'Cannot logout at the moment. Please try again.')
     }
+  }
+
+  const handleSaveClick = async (e: any) => {
+    e.preventDefault()
+
+    const user = await authSignIn()
+    setUser(user)
+
+    await getMessagingToken()
   }
 
   return (
     <>
-      <Show
-        when={user()}
-        fallback={<button onClick={handleSignInClick}>Sign In</button>}
-      >
-        <button onClick={handleSignOutClick}>
-          Sign Out as {user()?.user.displayName}
-        </button>
-      </Show>
+      <div class="auth-control">
+        <Show
+          when={user()}
+          fallback={<button onClick={handleSignInClick}>Sign In</button>}
+        >
+          <button onClick={handleSignOutClick}>
+            Sign Out as {user()?.user.displayName}
+          </button>
+        </Show>
+      </div>
 
       <header>
         <h1>{APP_NAME}</h1>
         <div class="current-date">{currentDate()}</div>
       </header>
+
+      <button onclick={handleSaveClick}>
+        Request permissions and save token
+      </button>
 
       {currentPhase() === undefined && <div class="loader">Loading...</div>}
 
@@ -111,6 +126,8 @@ function App() {
           {(moonDate) => <MoonDate moonDate={moonDate()} />}
         </Index>
       </div>
+
+      <Toaster />
     </>
   )
 }

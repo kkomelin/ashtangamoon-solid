@@ -5,6 +5,7 @@ import { VitePWA } from 'vite-plugin-pwa'
 import solid from 'vite-plugin-solid'
 
 const pwaOptions: Partial<VitePWAOptions> = {
+  disable: process.env?.PWA_DISABLE === 'true',
   base: '/',
   includeAssets: [
     'img/apple-touch-icon.png',
