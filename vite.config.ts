@@ -1,9 +1,11 @@
 import { defineConfig } from 'vite'
+import { ViteMinifyPlugin } from 'vite-plugin-minify'
 import type { VitePWAOptions } from 'vite-plugin-pwa'
 import { VitePWA } from 'vite-plugin-pwa'
 import solid from 'vite-plugin-solid'
 
 const pwaOptions: Partial<VitePWAOptions> = {
+  disable: process.env?.PWA_DISABLE === 'true',
   base: '/',
   includeAssets: [
     'img/apple-touch-icon.png',
@@ -59,5 +61,10 @@ const pwaOptions: Partial<VitePWAOptions> = {
 }
 
 export default defineConfig({
-  plugins: [solid(), VitePWA(pwaOptions)],
+  plugins: [
+    solid(),
+    VitePWA(pwaOptions),
+    // Config details are here: https://www.npmjs.com/package/html-minifier-terser.
+    ViteMinifyPlugin({}),
+  ],
 })
