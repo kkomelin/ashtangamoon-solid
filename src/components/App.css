@@ -37,10 +37,3 @@
   font-weight: normal;
   margin-bottom: 0.1rem;
 }
-
-.auth-control {
-  position:absolute;
-  top:0;
-  right:0;
-  padding: 5px;
-}
