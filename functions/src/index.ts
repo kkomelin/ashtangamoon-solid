@@ -7,6 +7,8 @@ import {
 
 const TOPIC = 'fullNewMoonNotifications'
 
+admin.initializeApp()
+
 export const subscribeToTopic = onDocumentCreated(
   'fcmTokens/{token}',
   async (event) => {
@@ -23,13 +25,21 @@ export const subscribeToTopic = onDocumentCreated(
         )
         return
       }
+
+      logger.log('A token has been subscribed to the topic successfully', {
+        token,
+        topic: TOPIC,
+      })
     } catch (e) {
-      logger.error('Could not subscribe to the topic', { token, topic: TOPIC })
+      logger.error(e, {
+        token,
+        topic: TOPIC,
+      })
     }
   }
 )
 
-export const unsubscribeToTopic = onDocumentDeleted(
+export const unsubscribeFromTopic = onDocumentDeleted(
   'fcmTokens/{token}',
   async (event) => {
     const token = event.params.token
@@ -47,8 +57,13 @@ export const unsubscribeToTopic = onDocumentDeleted(
         )
         return
       }
+
+      logger.log('A token has been unsubscribed from the topic successfully', {
+        token,
+        topic: TOPIC,
+      })
     } catch (e) {
-      logger.error('Could not unsubscribe from the topic', {
+      logger.error(e, {
         token,
         topic: TOPIC,
       })

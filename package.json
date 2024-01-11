@@ -9,8 +9,9 @@
     "build:watch": "tsc && PWA_DISABLE=true vite build --watch",
     "preview": "vite preview",
     "format": "prettier --write .",
-    "emulators": "GOOGLE_APPLICATION_CREDENTIALS='/home/kos/Desktop/projects/test-push-2-995d1-715b14af1746.json' firebase emulators:start",
-    "functions:build": "cd ./functions && npm run build"
+    "emulators": "npm run functions:build && GOOGLE_APPLICATION_CREDENTIALS='/home/kos/Desktop/projects/test-push-2-995d1-715b14af1746.json' firebase emulators:start",
+    "functions:build": "npm --prefix './functions' run build",
+    "functions:build:watch": "npm --prefix './functions' run build:watch"
   },
   "dependencies": {
     "d3": "^7.8.5",

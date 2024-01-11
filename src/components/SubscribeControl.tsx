@@ -1,28 +1,45 @@
+import { Show, createEffect, createSignal } from 'solid-js'
 import {
+  isSubscribed,
   subscribeToTopic,
   unsubscribeFromTopic,
 } from '../core/firebase/subscription'
 import styles from './SubscribeControl.module.css'
 
-interface IProps {}
+const SubscribeControl = () => {
+  const [isUserSubscribed, setIsUserSubscribed] = createSignal(false)
 
-const SubscribeControl = (props: IProps) => {
   const handleSubscribeClick = async (e: any) => {
     e.preventDefault()
 
-    await subscribeToTopic()
+    const result = await subscribeToTopic()
+    setIsUserSubscribed(result)
   }
 
   const handleUnsubscribeClick = async (e: any) => {
     e.preventDefault()
 
-    await unsubscribeFromTopic()
+    const result = await unsubscribeFromTopic()
+    setIsUserSubscribed(!result)
   }
+
+  createEffect(async () => {
+    try {
+      const result = await isSubscribed()
+      setIsUserSubscribed(result)
+    } catch (e) {
+      setIsUserSubscribed(false)
+    }
+  })
 
   return (
     <div class={styles.subscribeControl}>
-      <button onClick={handleSubscribeClick}>Subscribe</button>
-      <button onClick={handleUnsubscribeClick}>Unsubscribe</button>
+      <Show
+        when={isUserSubscribed()}
+        fallback={<button onClick={handleSubscribeClick}>Subscribe</button>}
+      >
+        <button onClick={handleUnsubscribeClick}>Unsubscribe</button>
+      </Show>
     </div>
   )
 }
