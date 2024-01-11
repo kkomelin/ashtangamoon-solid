@@ -6,7 +6,7 @@ New and full moon days are used in Ashtanga Vinyasa Yoga for taking rest and fas
 
 [Check it out](https://ashtangamoon.org)
 
-This project supersedes its previous [vanilla JS version](https://github.com/kkomelin/ashtangamoon-vanilla).
+_This project supersedes its previous [vanilla JS version](https://github.com/kkomelin/ashtangamoon-vanilla)._
 
 ## Install
 
