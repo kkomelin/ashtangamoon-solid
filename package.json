@@ -39,7 +39,13 @@
     "progressive-web-app",
     "progressive-web-apps",
     "workbox",
+    "firebase",
+    "firebase-auth",
+    "firebase-firestore",
+    "firebase-cloud-functions",
+    "firebase-cloud-messaging",
     "yoga",
+    "ashtanga",
     "ashtanga-yoga"
   ],
   "author": "Konstantin Komelin <konstantin.komelin@gmail.com>",
