@@ -1,6 +1,6 @@
 # Ashtanga Moon
 
-A simple PWA app with Solid.js, Workbox, D3 and Vite which allows to keep track of new and full moon days and visualizes current moon phase.
+A PWA app, built with Solid.js, Workbox, D3, Vite and Firebase, which allows to keep track of new and full moon days.
 
 New and full moon days are used in Ashtanga Vinyasa Yoga for taking rest and fasting.
 
