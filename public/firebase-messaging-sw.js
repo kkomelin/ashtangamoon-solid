@@ -12,8 +12,9 @@ messaging.onBackgroundMessage((payload) => {
 
   const notificationTitle =
     payload?.notification?.title || 'Background Message Title'
+
   const notificationOptions = {
-    body: payload?.notification?.title || 'Background Message body.',
+    body: payload?.notification?.body || 'Background Message Body',
     icon: '/img/android-chrome-192x192.png',
   }
 
