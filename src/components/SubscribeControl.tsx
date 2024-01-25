@@ -5,6 +5,8 @@ import {
   unsubscribeFromTopic,
 } from '../core/firebase/subscription'
 import styles from './SubscribeControl.module.css'
+import SubscribeIcon from './icons/SubscribeIcon'
+import UnsubscribeIcon from './icons/UnsubscribeIcon'
 
 const SubscribeControl = () => {
   const [isUserSubscribed, setIsUserSubscribed] = createSignal(false)
@@ -36,9 +38,17 @@ const SubscribeControl = () => {
     <div class={styles.subscribeControl}>
       <Show
         when={isUserSubscribed()}
-        fallback={<button onClick={handleSubscribeClick}>Subscribe</button>}
+        fallback={
+          <button onClick={handleSubscribeClick} title="Subscribe">
+            <span class="sr-only">Subscribe</span>
+            <SubscribeIcon />
+          </button>
+        }
       >
-        <button onClick={handleUnsubscribeClick}>Unsubscribe</button>
+        <button onClick={handleUnsubscribeClick} title="Unsubscribe">
+          <span class="sr-only">Unsubscribe</span>
+          <UnsubscribeIcon />
+        </button>
       </Show>
     </div>
   )

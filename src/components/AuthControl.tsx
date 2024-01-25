@@ -2,6 +2,8 @@ import { UserCredential } from 'firebase/auth'
 import { Show } from 'solid-js'
 import { authSignIn, authSignOut } from '../core/firebase/auth/utils'
 import { error } from '../core/utils/toasts'
+import SignInIcon from './icons/SignInIcon'
+import SignOutIcon from './icons/SignOutIcon'
 
 interface IProps {
   user?: UserCredential
@@ -33,9 +35,17 @@ const AuthControl = (props: IProps) => {
     <div>
       <Show
         when={props.user}
-        fallback={<button onClick={handleSignInClick}>Sign In</button>}
+        fallback={
+          <button onClick={handleSignInClick} title="Sign In">
+            <span class="sr-only">Sign In</span>
+            <SignInIcon />
+          </button>
+        }
       >
-        <button onClick={handleSignOutClick}>Sign Out</button>
+        <button onClick={handleSignOutClick} title="Sign Out">
+          <span class="sr-only">Sign Out</span>
+          <SignOutIcon />
+        </button>
       </Show>
     </div>
   )

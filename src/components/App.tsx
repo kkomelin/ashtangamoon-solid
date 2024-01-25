@@ -65,7 +65,7 @@ function App() {
     <>
       <ActionPanel user={user()} onAuth={handleAuth} />
 
-      <header>
+      <header class='app-header'>
         <h1>{APP_NAME}</h1>
         <div class="current-date">{currentDate()}</div>
       </header>
@@ -80,7 +80,7 @@ function App() {
         </Index>
       </div>
 
-      <Toaster />
+      <Toaster position="top-left" />
     </>
   )
 }

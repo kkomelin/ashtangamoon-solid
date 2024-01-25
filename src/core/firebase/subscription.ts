@@ -17,9 +17,7 @@ export async function subscribeToTopic() {
   // Get registration token. Initially this makes a network call, once retrieved
   // subsequent calls to getToken will return from cache.
   try {
-    const currentToken = await getToken(messaging, {
-      vapidKey: PUBLIC_VAPID_KEY,
-    })
+    const currentToken = await requestToken()
 
     if (currentToken) {
       return await registerToken(
@@ -48,9 +46,7 @@ export async function unsubscribeFromTopic() {
   // Get registration token. Initially this makes a network call, once retrieved
   // subsequent calls to getToken will return from cache.
   try {
-    const currentToken = await getToken(messaging, {
-      vapidKey: PUBLIC_VAPID_KEY,
-    })
+    const currentToken = await requestToken()
 
     if (currentToken) {
       return await unregisterToken(firestore, currentToken, userErrorMessage)
@@ -74,9 +70,7 @@ export async function isSubscribed() {
   // Get registration token. Initially this makes a network call, once retrieved
   // subsequent calls to getToken will return from cache.
   try {
-    const currentToken = await getToken(messaging, {
-      vapidKey: PUBLIC_VAPID_KEY,
-    })
+    const currentToken = await requestToken()
 
     if (currentToken) {
       return await isTokenRegistered(firestore, currentToken, userErrorMessage)
@@ -91,4 +85,10 @@ export async function isSubscribed() {
     error(e, userErrorMessage)
     return false
   }
+}
+
+export async function requestToken() {
+  return await getToken(messaging, {
+    vapidKey: PUBLIC_VAPID_KEY,
+  })
 }
