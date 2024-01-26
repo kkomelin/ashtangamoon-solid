@@ -1,10 +1,11 @@
 export const PUBLIC_VAPID_KEY =
-  'BK8ND31eJtHauaXUFfROCLK2mVIPi2VaV1WoQkYsOOa193jf8oqaF6K1gF9dS8hovaHwEEs_llju_CiZBeA7JuU'
+  'BLpAOBR8OJBkGVyAFfNbX4t7Gc4IZa2ooJQseNAuO_81aIV-zfSs-PQzLb5W7lONrmw6Je41muNMWAIyvSbhCjs'
 export const FIREBASE_CONFIGURATION = {
-  apiKey: 'AIzaSyAiqR7IKkPZy1FEbMmXyipNFjsgTUDlVXI',
-  authDomain: 'test-push-2-995d1.firebaseapp.com',
-  projectId: 'test-push-2-995d1',
-  storageBucket: 'test-push-2-995d1.appspot.com',
-  messagingSenderId: '430604690456',
-  appId: '1:430604690456:web:7a77db82aafaa057e0cf6d',
+  apiKey: "AIzaSyBC7J38CNmlASPp4XdBUByDxFRUo0shvCU",
+  authDomain: "ashtangamoon.firebaseapp.com",
+  projectId: "ashtangamoon",
+  storageBucket: "ashtangamoon.appspot.com",
+  messagingSenderId: "1088317029130",
+  appId: "1:1088317029130:web:88dad1a32cd79454be58f3",
+  measurementId: "G-V8D9BZJ2FV"
 }
