@@ -1,5 +1,5 @@
 import { connectFirestoreEmulator, getFirestore } from 'firebase/firestore'
-import { EMULATE } from '../../config'
+import { EMULATE } from '../../../config/main'
 import app from '../init'
 
 const firestore = getFirestore(app)

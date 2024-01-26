@@ -1,5 +1,5 @@
 import { getToken } from 'firebase/messaging'
-import { PUBLIC_VAPID_KEY } from '../config'
+import { PUBLIC_VAPID_KEY } from '../../config/keys'
 import { error } from '../utils/toasts'
 import auth from './auth/init'
 import firestore from './firestore/init'

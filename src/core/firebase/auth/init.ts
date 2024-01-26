@@ -1,5 +1,5 @@
 import { connectAuthEmulator, getAuth } from 'firebase/auth'
-import { EMULATE } from '../../config'
+import { EMULATE } from '../../../config/main'
 import app from '../init'
 
 const auth = getAuth(app)
