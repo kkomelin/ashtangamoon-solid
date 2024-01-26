@@ -9,7 +9,7 @@
     "build:watch": "tsc && VITE_EMULATE=true PWA_DISABLE=true vite build --watch",
     "preview": "vite preview",
     "format": "prettier --write .",
-    "emulators": "npm run functions:build && GOOGLE_APPLICATION_CREDENTIALS='/home/kos/Desktop/projects/test-push-2-995d1-715b14af1746.json' firebase emulators:start",
+    "emulators": "npm run functions:build && GOOGLE_APPLICATION_CREDENTIALS='/home/kos/Desktop/projects/ashtangamoon-cbab049dea6e.json' firebase emulators:start",
     "functions:build": "npm --prefix './functions' run build",
     "functions:build:watch": "npm --prefix './functions' run build:watch",
     "deploy": "firebase deploy"
