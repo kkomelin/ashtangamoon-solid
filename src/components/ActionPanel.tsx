@@ -1,16 +1,13 @@
-import { UserCredential } from 'firebase/auth'
 import { Show, onMount } from 'solid-js'
+import { useAuth } from '../context/AuthContext'
 import { requestToken } from '../core/firebase/subscription'
 import styles from './ActionPanel.module.css'
 import AuthControl from './AuthControl'
 import SubscribeControl from './SubscribeControl'
 
-interface IProps {
-  user?: UserCredential
-  onAuth: (user?: UserCredential) => void
-}
-
+interface IProps {}
 const ActionPanel = (props: IProps) => {
+  const { user } = useAuth()
 
   onMount(async () => {
     await requestToken()
@@ -18,9 +15,9 @@ const ActionPanel = (props: IProps) => {
 
   return (
     <div class={styles.actionPanel}>
-      <AuthControl user={props.user} onAuth={props.onAuth} />
+      <AuthControl />
 
-      <Show when={props.user}>
+      <Show when={user() != null}>
         <SubscribeControl />
       </Show>
     </div>

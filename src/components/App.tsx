@@ -1,8 +1,10 @@
-import { UserCredential } from '@firebase/auth'
-import { Index, createEffect, createSignal, onCleanup, onMount } from 'solid-js'
+import { onAuthStateChanged, User } from 'firebase/auth'
+import { createSignal, Index, onCleanup, onMount } from 'solid-js'
 import { Toaster } from 'solid-toast'
 import { APP_NAME } from '../config/main'
+import { useAuth } from '../context/AuthContext'
 import calculateMoonPhases from '../core/calculateMoonPhases'
+import auth from '../core/firebase/auth/init'
 import { currentDateFormatted, formatMoonDate } from '../core/utils/main'
 import visualizeMoonPhase from '../core/visualizeMoonPhase'
 import { IMoonDate } from '../types/IMoonDate'
@@ -16,7 +18,7 @@ function App() {
   )
   const [dates, setDates] = createSignal<IMoonDate[]>([])
   const [currentPhase, setCurrentPhase] = createSignal<number>()
-  const [user, setUser] = createSignal<UserCredential>()
+  const { setUser } = useAuth()
 
   let moonRef!: SVGSVGElement
   let renderInterval: NodeJS.Timeout
@@ -45,7 +47,13 @@ function App() {
     renderInterval = setInterval(refresh, 1 * 60 * 1000)
   })
 
-  createEffect(() => {
+  onMount(() => {
+    onAuthStateChanged(auth, (user: User | null) => {
+      setUser(user)
+    })
+  })
+
+  onMount(() => {
     const phase = currentPhase()
 
     if (phase !== undefined) {
@@ -57,15 +65,9 @@ function App() {
     clearInterval(renderInterval)
   })
 
-  const handleAuth = async (user?: UserCredential) => {
-    setUser(user)
-  }
-
   return (
     <>
-      <ActionPanel user={user()} onAuth={handleAuth} />
-
-      <header class='app-header'>
+      <header class="app-header">
         <h1>{APP_NAME}</h1>
         <div class="current-date">{currentDate()}</div>
       </header>
@@ -74,10 +76,14 @@ function App() {
 
       <svg id="moon" ref={moonRef} />
 
-      <div class="next-dates">
-        <Index each={dates()}>
-          {(moonDate) => <MoonDate moonDate={moonDate()} />}
-        </Index>
+      <div>
+        <div class="next-dates">
+          <Index each={dates()}>
+            {(moonDate) => <MoonDate moonDate={moonDate()} />}
+          </Index>
+        </div>
+
+        <ActionPanel />
       </div>
 
       <Toaster position="top-left" />

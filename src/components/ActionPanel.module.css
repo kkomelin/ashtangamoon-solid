@@ -1,11 +1,9 @@
 .actionPanel {
-  position:absolute;
-  top:0;
-  right:0;
   padding: 5px;
   display:flex;
   flex-direction: row;
   gap: 10px;
+  justify-content: center;
 }
 
 .actionPanel button {

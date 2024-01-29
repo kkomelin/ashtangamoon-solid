@@ -1,4 +1,4 @@
-import { Show, createEffect, createSignal } from 'solid-js'
+import { Show, createSignal, onMount } from 'solid-js'
 import {
   isSubscribed,
   subscribeToTopic,
@@ -25,7 +25,7 @@ const SubscribeControl = () => {
     setIsUserSubscribed(!result)
   }
 
-  createEffect(async () => {
+  onMount(async () => {
     try {
       const result = await isSubscribed()
       setIsUserSubscribed(result)
