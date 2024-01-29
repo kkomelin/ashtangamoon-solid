@@ -5,8 +5,7 @@ import { error } from '../core/utils/toasts'
 import SignInIcon from './icons/SignInIcon'
 import SignOutIcon from './icons/SignOutIcon'
 
-interface IProps {}
-const AuthControl = (props: IProps) => {
+const AuthControl = () => {
   const { user } = useAuth()
 
   const handleSignInClick = async (e: any) => {

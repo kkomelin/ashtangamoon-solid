@@ -5,8 +5,7 @@ import styles from './ActionPanel.module.css'
 import AuthControl from './AuthControl'
 import SubscribeControl from './SubscribeControl'
 
-interface IProps {}
-const ActionPanel = (props: IProps) => {
+const ActionPanel = () => {
   const { user } = useAuth()
 
   onMount(async () => {
