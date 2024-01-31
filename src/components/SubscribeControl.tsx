@@ -40,14 +40,14 @@ const SubscribeControl = () => {
         when={isUserSubscribed()}
         fallback={
           <button onClick={handleSubscribeClick} title="Subscribe">
-            <span class="sr-only">Subscribe</span>
             <SubscribeIcon />
+            <span>Subscribe</span>
           </button>
         }
       >
         <button onClick={handleUnsubscribeClick} title="Unsubscribe">
-          <span class="sr-only">Unsubscribe</span>
           <UnsubscribeIcon />
+          <span>Unsubscribe</span>
         </button>
       </Show>
     </div>

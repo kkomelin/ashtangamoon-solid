@@ -13,6 +13,10 @@
   text-align: center;
 }
 
+.footer {
+  width: 100%;
+}
+
 .next-dates {
   color: #ffffff;
   margin-bottom: 1rem;
@@ -23,6 +27,7 @@
 }
 
 .next-dates .moon-phase {
+  width:100%;
   text-align: center;
   margin-bottom: 0.8rem;
   color: #9de7fa;
@@ -35,10 +40,22 @@
 }
 
 .next-dates .moon-phase .title {
-  font-size: 18px;
+  width: 50%;
+  font-size: 16px;
   color: #ffffff;
-  font-weight: normal;
+  font-weight: bold;
   margin-bottom: 0.1rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+}
+.next-dates .moon-phase .date {
+  width: 50%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
 }
 
 @media only screen and (min-width: 500px) {
@@ -47,8 +64,19 @@
     gap: 3rem;
   }
   .next-dates .moon-phase {
+    width: auto;
     flex-direction: column;
     gap: 0;
+  }
+  .next-dates .moon-phase .title {
+    width: auto;
+    font-size: 18px;
+    font-weight: normal;
+    display: block;
+  }
+  .next-dates .moon-phase .date {
+    width: auto;
+    display: block;
   }
 
   .app-header {

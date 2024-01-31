@@ -76,7 +76,7 @@ function App() {
 
       <svg id="moon" ref={moonRef} />
 
-      <div>
+      <footer class="footer">
         <div class="next-dates">
           <Index each={dates()}>
             {(moonDate) => <MoonDate moonDate={moonDate()} />}
@@ -84,7 +84,7 @@ function App() {
         </div>
 
         <ActionPanel />
-      </div>
+      </footer>
 
       <Toaster position="top-left" />
     </>
