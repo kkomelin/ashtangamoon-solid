@@ -16,15 +16,6 @@ const AuthControl = () => {
     }
   }
 
-  // const handleSignOutClick = async (e: any) => {
-  //   e.preventDefault()
-  //   try {
-  //     await authSignOut()
-  //   } catch (e) {
-  //     error(e, 'Cannot logout at the moment. Please try again.')
-  //   }
-  // }
-
   return (
     <div>
       <Show
@@ -37,10 +28,6 @@ const AuthControl = () => {
         }
       >
         <></>
-        {/* <button onClick={handleSignOutClick} title="Sign Out">
-          <span class="sr-only">Sign Out</span>
-          <SignOutIcon />
-        </button> */}
       </Show>
     </div>
   )
