@@ -23,7 +23,7 @@ function App() {
   let moonRef!: SVGSVGElement
   let renderInterval: NodeJS.Timeout
 
-  const refresh = () => {
+  const calculateDates = () => {
     setCurrentDate(currentDateFormatted())
 
     const { currentPhase, newMoon, fullMoon, nextNewMoon } =
@@ -41,21 +41,18 @@ function App() {
   }
 
   onMount(() => {
-    refresh()
+    calculateDates()
 
     // Refresh once a minute.
-    renderInterval = setInterval(refresh, 1 * 60 * 1000)
-  })
+    renderInterval = setInterval(calculateDates, 1 * 60 * 1000)
 
-  onMount(() => {
+    // Firebase Auth state change handler.
     onAuthStateChanged(auth, (user: User | null) => {
       setUser(user)
     })
-  })
 
-  onMount(() => {
+    // Visualize current moon phase.
     const phase = currentPhase()
-
     if (phase !== undefined) {
       visualizeMoonPhase(moonRef, phase)
     }

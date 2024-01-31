@@ -1,23 +1,14 @@
-import { Auth } from 'firebase/auth'
-import {
-  DocumentSnapshot,
-  Firestore,
-  deleteDoc,
-  doc,
-  getDoc,
-  setDoc,
-} from 'firebase/firestore'
 import { error, success } from '../../utils/toasts'
+import { Schema, db } from './db'
 
 export const registerToken = async (
-  auth: Auth,
-  firestore: Firestore,
+  uid: string | undefined,
   currentToken: string,
   userErrorMessage: string
 ) => {
   try {
-    await setDoc(doc(firestore, 'fcmTokens', currentToken), {
-      uid: auth.currentUser?.uid,
+    await db.fcmTokens.set(currentToken as Schema['fcmTokens']['Id'], {
+      uid,
     })
 
     success('Subscribed successfully')
@@ -29,12 +20,11 @@ export const registerToken = async (
 }
 
 export const unregisterToken = async (
-  firestore: Firestore,
   currentToken: string,
   userErrorMessage: string
 ) => {
   try {
-    await deleteDoc(doc(firestore, 'fcmTokens', currentToken))
+    await db.fcmTokens.remove(currentToken as Schema['fcmTokens']['Id'])
 
     success('Unsubscribed successfully')
     return true
@@ -45,15 +35,15 @@ export const unregisterToken = async (
 }
 
 export const isTokenRegistered = async (
-  firestore: Firestore,
   currentToken: string,
   userErrorMessage: string
 ) => {
   try {
-    const docSnap: DocumentSnapshot = await getDoc(
-      doc(firestore, 'fcmTokens', currentToken)
+    const token = await db.fcmTokens.get(
+      currentToken as Schema['fcmTokens']['Id']
     )
-    return docSnap.exists()
+
+    return token != null
   } catch (e: any) {
     error(e, userErrorMessage)
     return false

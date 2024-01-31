@@ -20,6 +20,7 @@
   align-items: center;
   gap: 0.8rem;
   border: 1px solid #ffffff;
+  color: #ffffff;
   border-radius: 0.3rem;
 }
 .actionPanel button span {
@@ -27,4 +28,5 @@
   flex-direction: column;
   justify-content:center;
   alight-items: center;
+  color: #ffffff;
 }

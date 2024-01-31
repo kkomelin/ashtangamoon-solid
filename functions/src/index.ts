@@ -1,4 +1,3 @@
-import { isDate } from 'date-fns'
 import * as admin from 'firebase-admin'
 import * as logger from 'firebase-functions/logger'
 import {
@@ -83,18 +82,9 @@ export const calculateMoonPhases = onSchedule(
 
     const firestore = admin.firestore()
 
-    if (
-      (newMoon != null && isDate(newMoon) && isMoonDayClose(newMoon)) ||
-      (nextNewMoon != null &&
-        isDate(nextNewMoon) &&
-        isMoonDayClose(nextNewMoon))
-    ) {
+    if (isMoonDayClose(newMoon) || isMoonDayClose(nextNewMoon)) {
       await createMessage(firestore, EMoonPhase.NEW)
-    } else if (
-      fullMoon != null &&
-      isDate(fullMoon) &&
-      isMoonDayClose(fullMoon)
-    ) {
+    } else if (isMoonDayClose(fullMoon)) {
       await createMessage(firestore, EMoonPhase.FULL)
     }
 

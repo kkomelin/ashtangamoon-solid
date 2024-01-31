@@ -1,4 +1,4 @@
-import { differenceInHours } from 'date-fns'
+import { differenceInHours, isDate } from 'date-fns'
 import { phase_hunt } from 'lune'
 import { EMoonPhase } from './types/EMoonPhase'
 import { IMessage } from './types/IMessage'
@@ -14,6 +14,10 @@ export const getMoonPhases = () => {
 }
 
 export const isMoonDayClose = (moonDate: Date) => {
+  if (moonDate == null || !isDate(moonDate)) {
+    return false
+  }
+
   const diffHours = differenceInHours(moonDate, new Date())
 
   return diffHours > 6 && diffHours <= 36

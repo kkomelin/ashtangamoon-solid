@@ -2,7 +2,6 @@ import { getToken } from 'firebase/messaging'
 import { PUBLIC_VAPID_KEY } from '../../config/keys'
 import { error } from '../utils/toasts'
 import auth from './auth/init'
-import firestore from './firestore/init'
 import {
   isTokenRegistered,
   registerToken,
@@ -21,8 +20,7 @@ export async function subscribeToTopic() {
 
     if (currentToken) {
       return await registerToken(
-        auth,
-        firestore,
+        auth.currentUser?.uid,
         currentToken,
         userErrorMessage
       )
@@ -49,7 +47,7 @@ export async function unsubscribeFromTopic() {
     const currentToken = await requestToken()
 
     if (currentToken) {
-      return await unregisterToken(firestore, currentToken, userErrorMessage)
+      return await unregisterToken(currentToken, userErrorMessage)
     } else {
       error(
         'No registration token available. Request permission to generate one.',
@@ -73,7 +71,7 @@ export async function isSubscribed() {
     const currentToken = await requestToken()
 
     if (currentToken) {
-      return await isTokenRegistered(firestore, currentToken, userErrorMessage)
+      return await isTokenRegistered(currentToken, userErrorMessage)
     } else {
       error(
         'No registration token available. Request permission to generate one.',
