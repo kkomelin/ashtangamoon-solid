@@ -2,7 +2,7 @@ import { User } from 'firebase/auth'
 import { createContext, createSignal, useContext } from 'solid-js'
 
 function useProviderValue() {
-  const [user, setUser] = createSignal<User | null>(null)
+  const [user, setUser] = createSignal<User | null | undefined>(undefined)
   return { user, setUser }
 }
 
