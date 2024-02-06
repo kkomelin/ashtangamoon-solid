@@ -4,7 +4,7 @@ import './init'
 
 export const db = schema(
   ($) => ({
-    fcmTokens: $.collection<FcmTokens>(),
+    fcmTokens: $.collection<FcmToken, string>(),
   }),
   { app: APP_MACHINE_NAME }
 )
@@ -13,6 +13,6 @@ export type Schema = Typesaurus.Schema<typeof db>
 
 // Models:
 
-interface FcmTokens {
+interface FcmToken {
   uid: string | undefined
 }

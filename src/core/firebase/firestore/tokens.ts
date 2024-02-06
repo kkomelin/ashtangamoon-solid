@@ -1,5 +1,5 @@
 import { error, success } from '../../utils/toasts'
-import { Schema, db } from './db'
+import { db } from './db'
 
 export const registerToken = async (
   uid: string | undefined,
@@ -7,7 +7,7 @@ export const registerToken = async (
   userErrorMessage: string
 ) => {
   try {
-    await db.fcmTokens.set(currentToken as Schema['fcmTokens']['Id'], {
+    await db.fcmTokens.set(currentToken, {
       uid,
     })
 
@@ -24,7 +24,7 @@ export const unregisterToken = async (
   userErrorMessage: string
 ) => {
   try {
-    await db.fcmTokens.remove(currentToken as Schema['fcmTokens']['Id'])
+    await db.fcmTokens.remove(currentToken)
 
     success('Unsubscribed successfully')
     return true
@@ -39,9 +39,7 @@ export const isTokenRegistered = async (
   userErrorMessage: string
 ) => {
   try {
-    const token = await db.fcmTokens.get(
-      currentToken as Schema['fcmTokens']['Id']
-    )
+    const token = await db.fcmTokens.get(currentToken)
 
     return token != null
   } catch (e: any) {

@@ -55,7 +55,11 @@ const SubscribeControl = () => {
             </button>
           }
         >
-          <button onClick={handleUnsubscribeClick} title="Unsubscribe">
+          <button
+            class={styles.unsubscribeButton}
+            onClick={handleUnsubscribeClick}
+            title="Unsubscribe"
+          >
             <UnsubscribeIcon />
             <span>Unsubscribe</span>
           </button>
