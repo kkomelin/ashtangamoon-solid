@@ -9,7 +9,6 @@ import { currentDateFormatted, formatMoonDate } from '../core/utils/main'
 import visualizeMoonPhase from '../core/visualizeMoonPhase'
 import { IMoonDate } from '../types/IMoonDate'
 import ActionPanel from './ActionPanel'
-import './App.css'
 import MoonDate from './MoonDate'
 
 function App() {
@@ -66,15 +65,17 @@ function App() {
     <>
       <header class="app-header">
         <h1>{APP_NAME}</h1>
-        <div class="current-date">{currentDate()}</div>
+        <div class="current-date text-center font-bold text-secondary">
+          {currentDate()}
+        </div>
       </header>
 
       {currentPhase() === undefined && <div class="loader">Loading...</div>}
 
       <svg id="moon" ref={moonRef} />
 
-      <footer class="footer">
-        <div class="next-dates">
+      <footer class="w-full">
+        <div class="mb-4 flex flex-col items-center justify-center text-primary sm:flex-row sm:gap-12">
           <Index each={dates()}>
             {(moonDate) => <MoonDate moonDate={moonDate()} />}
           </Index>

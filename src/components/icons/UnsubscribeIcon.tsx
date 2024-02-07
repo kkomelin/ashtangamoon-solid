@@ -6,7 +6,7 @@ const UnsubscribeIcon = (props: any) => {
       viewBox: '0 0 512 512',
       width: '20',
       height: '20',
-      fill: 'var(--am-text-color)',
+      fill: 'var(--am-color-primary)',
     },
     props
   )

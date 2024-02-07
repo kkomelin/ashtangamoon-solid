@@ -1,7 +1,5 @@
-import styles from './Loading.module.css'
-
 const Loading = () => {
-  return <div class={styles.loading}>Loading...</div>
+  return <div class="px-3.5 py-2.5">Loading...</div>
 }
 
 export default Loading

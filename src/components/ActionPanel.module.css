@@ -7,26 +7,10 @@
 }
 
 .actionPanel button {
-  border: none;
-  margin: 0;
-  padding: 0.6rem 0.9rem;
-  width: auto;
-  overflow: visible;
-  background: transparent;
-  cursor: pointer;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   gap: 0.8rem;
-  border: 1px solid #ffffff;
-  color: #ffffff;
   border-radius: 0.3rem;
-}
-.actionPanel button span {
-  display:flex;
-  flex-direction: column;
-  justify-content:center;
-  alight-items: center;
-  color: #ffffff;
 }

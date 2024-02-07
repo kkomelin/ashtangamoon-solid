@@ -6,7 +6,6 @@ import {
   unsubscribeFromTopic,
 } from '../core/firebase/subscription'
 import Loading from './Loading'
-import styles from './SubscribeControl.module.css'
 import SubscribeIcon from './icons/SubscribeIcon'
 import UnsubscribeIcon from './icons/UnsubscribeIcon'
 
@@ -44,24 +43,32 @@ const SubscribeControl = () => {
   })
 
   return (
-    <div class={styles.subscribeControl}>
+    <div class="flex flex-row gap-1">
       <Show when={isUserSubscribed() !== undefined} fallback={<Loading />}>
         <Show
           when={isUserSubscribed() === true}
           fallback={
-            <button onClick={handleSubscribeClick} title="Subscribe">
+            <button
+              class="cursor-pointer border border-primary px-3.5 py-2.5 text-primary"
+              onClick={handleSubscribeClick}
+              title="Subscribe"
+            >
               <SubscribeIcon />
-              <span>Subscribe</span>
+              <span class="flex flex-col items-center justify-center">
+                Subscribe
+              </span>
             </button>
           }
         >
           <button
-            class={styles.unsubscribeButton}
+            class="text-quarteraly border-quarteraly cursor-pointer border px-3.5 py-2.5"
             onClick={handleUnsubscribeClick}
             title="Unsubscribe"
           >
-            <UnsubscribeIcon />
-            <span>Unsubscribe</span>
+            <UnsubscribeIcon class="fill-quarteraly" />
+            <span class="!text-quarteraly flex flex-col items-center justify-center">
+              Unsubscribe
+            </span>
           </button>
         </Show>
       </Show>

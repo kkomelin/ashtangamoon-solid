@@ -8,15 +8,19 @@
   font-weight: 400;
 
   color-scheme: dark;
-  color: #ffffff;
-  background-color: #193d61;
+
+  @apply text-primary;
+  @apply bg-tertiary;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  --am-text-color: #ffffff;
+  --am-color-primary: #ffffff;
+  --am-color-secondary: #9de7fa;
+  --am-color-tertiary: #193d61;
+  --am-color-quarteraly: #4682B4;
 }
 
 h1 {
@@ -27,17 +31,4 @@ h1 {
   margin-inline-start: 0px;
   margin-inline-end: 0px;
   font-weight: bold;
-}
-
-/** Borrowed from Tailwind CSS (MIT License) https://tailwindcss.com/docs/screen-readers **/
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border-width: 0;
 }

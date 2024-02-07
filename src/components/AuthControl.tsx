@@ -23,9 +23,15 @@ const AuthControl = () => {
         <Show
           when={user() !== null}
           fallback={
-            <button onClick={handleSignInClick} title="Sign In">
+            <button
+              class="cursor-pointer border border-primary px-3.5 py-2.5 text-primary"
+              onClick={handleSignInClick}
+              title="Sign In"
+            >
               <SignInIcon />
-              <span>Sign In</span>
+              <span class="flex flex-col items-center justify-center">
+                Sign In
+              </span>
             </button>
           }
         >
