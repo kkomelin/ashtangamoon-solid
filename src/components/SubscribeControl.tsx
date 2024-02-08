@@ -49,7 +49,7 @@ const SubscribeControl = () => {
           when={isUserSubscribed() === true}
           fallback={
             <button
-              class="cursor-pointer border border-primary px-3.5 py-2.5 text-primary"
+              class="flex cursor-pointer flex-row items-center justify-center gap-3 rounded border border-primary px-3.5 py-2.5 text-primary"
               onClick={handleSubscribeClick}
               title="Subscribe"
             >
@@ -61,12 +61,12 @@ const SubscribeControl = () => {
           }
         >
           <button
-            class="text-quarteraly border-quarteraly cursor-pointer border px-3.5 py-2.5"
+            class="flex cursor-pointer flex-row items-center justify-center gap-3 rounded border border-quarteraly px-3.5 py-2.5 text-quarteraly"
             onClick={handleUnsubscribeClick}
             title="Unsubscribe"
           >
             <UnsubscribeIcon class="fill-quarteraly" />
-            <span class="!text-quarteraly flex flex-col items-center justify-center">
+            <span class="flex flex-col items-center justify-center !text-quarteraly">
               Unsubscribe
             </span>
           </button>

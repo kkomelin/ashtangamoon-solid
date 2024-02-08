@@ -1,15 +1,8 @@
 import { mergeProps } from 'solid-js'
+import { DEFAULT_ICON_PROPS } from '../../core/utils/theme'
 
 const SignInIcon = (props: any) => {
-  const merged = mergeProps(
-    {
-      viewBox: '0 0 512 512',
-      width: '20',
-      height: '20',
-      fill: 'var(--am-color-primary)',
-    },
-    props
-  )
+  const merged = mergeProps(DEFAULT_ICON_PROPS, props)
 
   return (
     <svg xmlns="http://www.w3.org/2000/svg" {...merged}>

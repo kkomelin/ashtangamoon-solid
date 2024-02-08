@@ -63,8 +63,8 @@ function App() {
 
   return (
     <>
-      <header class="app-header">
-        <h1>{APP_NAME}</h1>
+      <header class="mt-6">
+        <h1 class="my-4 block text-3xl font-bold">{APP_NAME}</h1>
         <div class="current-date text-center font-bold text-secondary">
           {currentDate()}
         </div>
@@ -74,7 +74,7 @@ function App() {
 
       <svg id="moon" ref={moonRef} />
 
-      <footer class="w-full">
+      <footer class="mb-8 w-full">
         <div class="mb-4 flex flex-col items-center justify-center text-primary sm:flex-row sm:gap-12">
           <Index each={dates()}>
             {(moonDate) => <MoonDate moonDate={moonDate()} />}

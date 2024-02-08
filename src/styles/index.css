@@ -1,0 +1,20 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+/* @fixme Figure out what's wrong with CSS includes. */
+/* @import "./_fonts.css"; */
+/* @import "./_variables.css"; */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+:root {
+  --am-color-primary: #ffffff;
+  --am-color-secondary: #9de7fa;
+  --am-color-tertiary: #193d61;
+  --am-color-quarteraly: #4682B4;
+}
+
+:root {
+  @apply text-primary;
+  @apply bg-tertiary;
+  @apply font-sans;
+}
