@@ -1,7 +1,6 @@
 import { onAuthStateChanged, User } from 'firebase/auth'
 import { createSignal, Index, onCleanup, onMount } from 'solid-js'
 import { Toaster } from 'solid-toast'
-import { APP_NAME } from '../config/main'
 import { useAuth } from '../context/AuthContext'
 import calculateMoonPhases from '../core/calculateMoonPhases'
 import auth from '../core/firebase/auth/init'
@@ -9,6 +8,7 @@ import { currentDateFormatted, formatMoonDate } from '../core/utils/main'
 import visualizeMoonPhase from '../core/visualizeMoonPhase'
 import { IMoonDate } from '../types/IMoonDate'
 import ActionPanel from './ActionPanel'
+import Loading from './Loading'
 import MoonDate from './MoonDate'
 
 function App() {
@@ -63,16 +63,15 @@ function App() {
 
   return (
     <>
-      <header class="mt-6">
-        <h1 class="my-4 block text-3xl font-bold">{APP_NAME}</h1>
-        <div class="current-date text-center font-bold text-secondary">
+      {currentPhase() === undefined && <Loading />}
+
+      <div>
+        <div class="current-date mb-6 text-center font-bold text-secondary">
           {currentDate()}
         </div>
-      </header>
 
-      {currentPhase() === undefined && <div class="loader">Loading...</div>}
-
-      <svg id="moon" ref={moonRef} />
+        <svg id="moon" ref={moonRef} />
+      </div>
 
       <footer class="mb-8 w-full">
         <div class="mb-4 flex flex-col items-center justify-center text-primary sm:flex-row sm:gap-12">

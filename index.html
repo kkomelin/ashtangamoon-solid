@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>Ashtanga Moon</title>
+    <title>%VITE_APP_NAME%</title>
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <link
       rel="apple-touch-icon"
@@ -28,12 +28,19 @@
     <meta name="msapplication-config" content="/img/browserconfig.xml">
     <style>
       /* App Shell */
+      :root {
+        --am-color-primary: #ffffff;
+        --am-color-secondary: #9de7fa;
+        --am-color-tertiary: #193d61;
+        --am-color-quarteraly: #4682B4;
+      }
       html,
       body {
         margin: 0;
         padding: 0;
-        background: #193d61;
-        color: #ffffff;
+        background-color: var(--am-color-tertiary);
+        color: var(--am-color-primary);
+        font-family: "Roboto", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
       }
       body,
       #root {
@@ -44,12 +51,43 @@
         width: 100%;
         height: 100vh;
       }
+      header {
+        text-align: center;
+        margin-top: 2.5rem;
+      }
+      header h1 {
+        margin-block-start: 0;
+        margin-block-end: 0;
+        margin-inline-start: 0;
+        margin-inline-end: 0;
+        font-weight: bold;
+        font-size: 1.875rem;
+        line-height: 2.25rem;
+        margin-bottom: 0.5rem;
+      }
+      header h2 {
+        margin-block-start: 0;
+        margin-block-end: 0;
+        margin-inline-start: 0;
+        margin-inline-end: 0;
+        color: var(--am-color-secondary);
+        letter-spacing: 0.025em;
+        margin-bottom: 1rem;
+        font-size: 1rem;
+        line-height: 1.5rem;
+        font-weight: normal;
+      }
     </style>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <header class="mt-10">
+        <h1 class="mb-2 text-3xl font-bold">%VITE_APP_NAME%</h1>
+        <h2 class="mb-4 text-base tracking-wide text-secondary">%VITE_APP_SLOGAN%</h2>
+      </header>
+    </div>
     <script type="module" src="/src/index.tsx"></script>
   </body>
 </html>

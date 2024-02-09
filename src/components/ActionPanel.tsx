@@ -12,13 +12,22 @@ const ActionPanel = () => {
   })
 
   return (
-    <div class="flex flex-row justify-center p-1">
-      <AuthControl />
+    <>
+      <div class="flex flex-row items-center justify-center p-1">
+        <AuthControl />
 
-      <Show when={user() != null}>
-        <SubscribeControl />
+        <Show when={user() != null}>
+          <SubscribeControl />
+        </Show>
+      </div>
+
+      <Show when={user() !== undefined}>
+        <div class="mx-auto mt-1 max-w-md px-4 text-center text-sm text-primary opacity-80">
+          Login and subscribe to receive push notifications one day before full
+          and new moon date
+        </div>
       </Show>
-    </div>
+    </>
   )
 }
 

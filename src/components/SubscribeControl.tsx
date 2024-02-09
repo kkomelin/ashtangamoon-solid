@@ -5,6 +5,7 @@ import {
   subscribeToTopic,
   unsubscribeFromTopic,
 } from '../core/firebase/subscription'
+import Button from './Button'
 import Loading from './Loading'
 import SubscribeIcon from './icons/SubscribeIcon'
 import UnsubscribeIcon from './icons/UnsubscribeIcon'
@@ -15,14 +16,14 @@ const SubscribeControl = () => {
   >(undefined)
   const { user } = useAuth()
 
-  const handleSubscribeClick = async (e: any) => {
+  const handleSubscribeClick = async (e: MouseEvent) => {
     e.preventDefault()
 
     const result = await subscribeToTopic()
     setIsUserSubscribed(result)
   }
 
-  const handleUnsubscribeClick = async (e: any) => {
+  const handleUnsubscribeClick = async (e: MouseEvent) => {
     e.preventDefault()
 
     const result = await unsubscribeFromTopic()
@@ -48,28 +49,22 @@ const SubscribeControl = () => {
         <Show
           when={isUserSubscribed() === true}
           fallback={
-            <button
-              class="flex cursor-pointer flex-row items-center justify-center gap-3 rounded border border-primary px-3.5 py-2.5 text-primary"
+            <Button
+              type="primary"
               onClick={handleSubscribeClick}
               title="Subscribe"
             >
               <SubscribeIcon />
-              <span class="flex flex-col items-center justify-center">
-                Subscribe
-              </span>
-            </button>
+            </Button>
           }
         >
-          <button
-            class="flex cursor-pointer flex-row items-center justify-center gap-3 rounded border border-quarteraly px-3.5 py-2.5 text-quarteraly"
+          <Button
+            type="secondary"
             onClick={handleUnsubscribeClick}
             title="Unsubscribe"
           >
             <UnsubscribeIcon class="fill-quarteraly" />
-            <span class="flex flex-col items-center justify-center !text-quarteraly">
-              Unsubscribe
-            </span>
-          </button>
+          </Button>
         </Show>
       </Show>
     </div>
