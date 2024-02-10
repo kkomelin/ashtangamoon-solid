@@ -84,11 +84,11 @@ export const calculateMoonPhases = onSchedule(
 
     if (isMoonDayClose(newMoon) || isMoonDayClose(nextNewMoon)) {
       await createMessage(firestore, EMoonPhase.NEW)
+      logger.log(`A ${EMoonPhase.NEW} message has been created successfully`)
     } else if (isMoonDayClose(fullMoon)) {
       await createMessage(firestore, EMoonPhase.FULL)
+      logger.log(`A ${EMoonPhase.FULL} message has been created successfully`)
     }
-
-    logger.log('A message has been created successfully')
   }
 )
 
