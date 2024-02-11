@@ -2,6 +2,7 @@ import { Show, onMount } from 'solid-js'
 import { useAuth } from '../context/AuthContext'
 import { requestToken } from '../core/firebase/subscription'
 import AuthControl from './AuthControl'
+import InfoBox from './InfoBox'
 import SubscribeControl from './SubscribeControl'
 
 const ActionPanel = () => {
@@ -13,20 +14,17 @@ const ActionPanel = () => {
 
   return (
     <>
-      <div class="flex flex-row items-center justify-center p-1">
+      <div class="flex flex-row items-center justify-center gap-4 p-1">
+        <Show when={user() !== undefined}>
+          <InfoBox />
+        </Show>
+
         <AuthControl />
 
         <Show when={user() != null}>
           <SubscribeControl />
         </Show>
       </div>
-
-      <Show when={user() !== undefined}>
-        <div class="mx-auto mt-1 max-w-md px-4 text-center text-sm text-primary opacity-80">
-          Login and subscribe to receive push notifications the day before full
-          and new moon
-        </div>
-      </Show>
     </>
   )
 }
