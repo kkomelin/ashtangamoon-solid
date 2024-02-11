@@ -12,7 +12,7 @@ const InfoBox = () => (
       <Popover.Positioner>
         <Popover.Content>
           <Popover.Description class='bg-primary text-tertiary px-4 py-3 rounded max-w-xs text-sm'>
-            Login and subscribe to receive a push notification the day before
+            Sign in and subscribe to receive a push notification the day before
             full and new moon.
           </Popover.Description>
         </Popover.Content>
