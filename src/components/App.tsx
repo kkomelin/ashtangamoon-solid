@@ -1,13 +1,15 @@
 import { onAuthStateChanged, User } from 'firebase/auth'
-import { createSignal, Index, onCleanup, onMount } from 'solid-js'
+import { createSignal, Index, onCleanup, onMount, Show } from 'solid-js'
 import { Toaster } from 'solid-toast'
 import { useAuth } from '../context/AuthContext'
 import calculateMoonPhases from '../core/calculateMoonPhases'
 import auth from '../core/firebase/auth/init'
 import { currentDateFormatted, formatMoonDate } from '../core/utils/main'
 import visualizeMoonPhase from '../core/visualizeMoonPhase'
+import useSW from '../hooks/useSW'
 import { IMoonDate } from '../types/IMoonDate'
 import ActionPanel from './ActionPanel'
+import InfoBox from './InfoBox'
 import Loading from './Loading'
 import MoonDate from './MoonDate'
 
@@ -17,7 +19,9 @@ function App() {
   )
   const [dates, setDates] = createSignal<IMoonDate[]>([])
   const [currentPhase, setCurrentPhase] = createSignal<number>()
-  const { setUser } = useAuth()
+  const { user, setUser } = useAuth()
+
+  useSW()
 
   let moonRef!: SVGSVGElement
   let renderInterval: NodeJS.Timeout
@@ -63,8 +67,11 @@ function App() {
 
   return (
     <>
-      {currentPhase() === undefined && <Loading />}
+      <Show when={user() !== undefined}>
+        <InfoBox />
+      </Show>
 
+      {currentPhase() === undefined && <Loading />}
       <div>
         <div class="current-date mb-6 text-center font-bold text-secondary">
           {currentDate()}
@@ -72,7 +79,6 @@ function App() {
 
         <svg id="moon" ref={moonRef} />
       </div>
-
       <footer class="mb-8 w-full">
         <div class="mb-4 flex flex-col items-center justify-center text-primary sm:flex-row sm:gap-12">
           <Index each={dates()}>
@@ -82,7 +88,6 @@ function App() {
 
         <ActionPanel />
       </footer>
-
       <Toaster position="top-left" />
     </>
   )

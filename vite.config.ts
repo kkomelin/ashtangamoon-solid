@@ -4,12 +4,14 @@ import type { VitePWAOptions } from 'vite-plugin-pwa'
 import { VitePWA } from 'vite-plugin-pwa'
 import solid from 'vite-plugin-solid'
 
+const isPwaDisabled = process.env?.PWA_DISABLE === 'true'
+
 const pwaOptions = (
   appName: string,
   appDescription: string
 ): Partial<VitePWAOptions> => {
   return {
-    disable: process.env?.PWA_DISABLE === 'true',
+    disable: isPwaDisabled,
     base: '/',
     includeAssets: [
       'img/apple-touch-icon.png',
@@ -50,14 +52,9 @@ const pwaOptions = (
       ],
     },
     useCredentials: true,
-    strategies: 'injectManifest',
-    srcDir: 'src',
-    filename: 'sw.ts',
-    registerType: 'autoUpdate',
     selfDestroying: false,
     devOptions: {
-      enabled: process.env.NODE_ENV === 'development',
-      /* when using generateSW the PWA plugin will switch to classic */
+      enabled: isPwaDisabled,
       type: 'module',
       navigateFallback: 'index.html',
     },

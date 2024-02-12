@@ -5,7 +5,7 @@ import app from '../init'
 const auth = getAuth(app)
 
 if (EMULATE) {
-  connectAuthEmulator(auth, 'http://127.0.0.1:9099')
+  connectAuthEmulator(auth, 'http://127.0.0.1:9099', { disableWarnings: true })
 }
 
 export default auth
