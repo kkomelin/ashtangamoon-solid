@@ -5,6 +5,7 @@ import {
   subscribeToTopic,
   unsubscribeFromTopic,
 } from '../core/firebase/subscription'
+import useOffline from '../hooks/useOffline'
 import Button from './Button'
 import Loading from './Loading'
 import SubscribeIcon from './icons/SubscribeIcon'
@@ -15,6 +16,7 @@ const SubscribeControl = () => {
     boolean | undefined
   >(undefined)
   const { user } = useAuth()
+  const { isOffline } = useOffline()
 
   const handleSubscribeClick = async (e: MouseEvent) => {
     e.preventDefault()
@@ -32,6 +34,11 @@ const SubscribeControl = () => {
 
   onMount(async () => {
     if (user() === undefined) {
+      return
+    }
+
+    if (isOffline()) {
+      setIsUserSubscribed(false)
       return
     }
 

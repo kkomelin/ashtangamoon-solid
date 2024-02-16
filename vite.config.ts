@@ -54,7 +54,7 @@ const pwaOptions = (
     useCredentials: true,
     selfDestroying: false,
     devOptions: {
-      enabled: isPwaDisabled,
+      enabled: !isPwaDisabled,
       type: 'module',
       navigateFallback: 'index.html',
     },

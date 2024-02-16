@@ -6,7 +6,7 @@ const InfoBox = () => (
   <Popover.Root portalled>
     <Popover.Trigger class="absolute right-1 top-1 p-3">
       <span class="sr-only">Show Info</span>
-      <InfoIcon class="fill-secondary" />
+      <InfoIcon class="fill-primary" />
     </Popover.Trigger>
     <Portal>
       <Popover.Positioner>
