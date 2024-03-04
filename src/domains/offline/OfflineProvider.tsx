@@ -6,13 +6,10 @@ export function OfflineProvider(props: any) {
   const { setIsOffline } = value
 
   const handleOnline = () => {
-    // @fixme: Add event listeners once only for multiple uses of the useOffline hook.
-    console.log('online ', Date.now())
     setIsOffline(!window.navigator.onLine)
   }
 
   const handleOffline = () => {
-    console.log('offline ', Date.now())
     setIsOffline(!window.navigator.onLine)
   }
 
