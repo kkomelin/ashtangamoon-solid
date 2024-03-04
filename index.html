@@ -21,24 +21,27 @@
       sizes="16x16"
       href="/img/favicon-16x16.png"
     />
-    <link rel="mask-icon" href="/img/safari-pinned-tab.svg" color="#193d61">
-    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="mask-icon" href="/img/safari-pinned-tab.svg" color="#193d61" />
+    <link rel="shortcut icon" href="/img/favicon.ico" />
     <meta name="msapplication-TileColor" content="#193d61" />
     <meta name="theme-color" content="#193d61" />
-    <meta name="msapplication-config" content="/img/browserconfig.xml">
+    <meta name="msapplication-config" content="/img/browserconfig.xml" />
     <meta name="description" content="%VITE_APP_SLOGAN%" />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="%VITE_APP_URL%" />
     <meta property="og:title" content="%VITE_APP_NAME%" />
     <meta property="og:description" content="%VITE_APP_SLOGAN%" />
-    <meta property="og:image" content="%VITE_APP_URL%/img/screenshot-wide.png" />
+    <meta
+      property="og:image"
+      content="%VITE_APP_URL%/img/screenshot-wide.png"
+    />
     <style>
       /* App Shell */
       :root {
         --am-color-primary: #ffffff;
         --am-color-secondary: #9de7fa;
         --am-color-tertiary: #193d61;
-        --am-color-quarteraly: #4682B4;
+        --am-color-quarteraly: #4682b4;
       }
       html,
       body {
@@ -46,7 +49,9 @@
         padding: 0;
         background-color: var(--am-color-tertiary);
         color: var(--am-color-primary);
-        font-family: "Roboto", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+        font-family: 'Roboto', ui-sans-serif, system-ui, sans-serif,
+          'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+          'Noto Color Emoji';
       }
       body,
       #root {
@@ -84,14 +89,16 @@
         font-weight: normal;
       }
     </style>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   </head>
   <body>
     <div id="root">
       <header class="mt-10">
         <h1 class="mb-2 text-3xl font-bold">%VITE_APP_NAME%</h1>
-        <h2 class="mb-4 text-base tracking-wide text-secondary">%VITE_APP_SLOGAN%</h2>
+        <h2 class="mb-4 text-base tracking-wide text-secondary">
+          %VITE_APP_SLOGAN%
+        </h2>
       </header>
     </div>
     <script type="module" src="/src/index.tsx"></script>

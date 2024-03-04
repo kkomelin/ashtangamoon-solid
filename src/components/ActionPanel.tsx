@@ -1,8 +1,8 @@
 import { Show, onMount } from 'solid-js'
 import toast from 'solid-toast'
-import { useAuth } from '../context/AuthContext'
 import { requestToken } from '../core/firebase/subscription'
-import useOffline from '../hooks/useOffline'
+import { useAuth } from '../domains/auth'
+import { useOffline } from '../domains/offline'
 import AuthControl from './AuthControl'
 import SubscribeControl from './SubscribeControl'
 

@@ -1,7 +1,7 @@
 import { Show } from 'solid-js'
-import { useAuth } from '../context/AuthContext'
 import { authSignIn } from '../core/firebase/auth/utils'
 import { error } from '../core/utils/toasts'
+import { useAuth } from '../domains/auth'
 import Button from './Button'
 import Loading from './Loading'
 import SignInIcon from './icons/SignInIcon'

@@ -1,16 +1,19 @@
 /* @refresh reload */
 import { render } from 'solid-js/web'
 import App from './components/App'
-import { AuthProvider } from './context/AuthContext'
+import { AuthProvider } from './domains/auth'
+import { OfflineProvider } from './domains/offline'
 import './styles/index.css'
 
 const root = document.getElementById('root')
 
 render(
   () => (
-    <AuthProvider>
-      <App />
-    </AuthProvider>
+    <OfflineProvider>
+      <AuthProvider>
+        <App />
+      </AuthProvider>
+    </OfflineProvider>
   ),
   root!
 )

@@ -74,7 +74,7 @@ const useSW = () => {
 
     if (offlineReady()) {
       toast('The application is ready to work offline.')
-      setOfflineReady(false);
+      setOfflineReady(false)
     }
   })
 

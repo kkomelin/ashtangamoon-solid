@@ -1,11 +1,11 @@
 import { Show, createSignal, onMount } from 'solid-js'
-import { useAuth } from '../context/AuthContext'
 import {
   isSubscribed,
   subscribeToTopic,
   unsubscribeFromTopic,
 } from '../core/firebase/subscription'
-import useOffline from '../hooks/useOffline'
+import { useAuth } from '../domains/auth'
+import { useOffline } from '../domains/offline'
 import Button from './Button'
 import Loading from './Loading'
 import SubscribeIcon from './icons/SubscribeIcon'
