@@ -5,9 +5,10 @@ import {
   onDocumentDeleted,
 } from 'firebase-functions/v2/firestore'
 import { onSchedule } from 'firebase-functions/v2/scheduler'
+import { createMessageIfPossible } from './db'
 import { EMoonPhase } from './types/EMoonPhase'
 import { IMessage } from './types/IMessage'
-import { createMessage, getMoonPhases, isMoonDayClose } from './utils'
+import { getMoonPhases, isMoonDayClose } from './utils'
 
 const TOPIC = 'fullNewMoonNotifications'
 
@@ -82,12 +83,12 @@ export const calculateMoonPhases = onSchedule(
 
     const firestore = admin.firestore()
 
+    const currentDate = new Date()
+
     if (isMoonDayClose(newMoon) || isMoonDayClose(nextNewMoon)) {
-      await createMessage(firestore, EMoonPhase.NEW)
-      logger.log(`A ${EMoonPhase.NEW} message has been created successfully`)
+      await createMessageIfPossible(firestore, EMoonPhase.NEW, currentDate)
     } else if (isMoonDayClose(fullMoon)) {
-      await createMessage(firestore, EMoonPhase.FULL)
-      logger.log(`A ${EMoonPhase.FULL} message has been created successfully`)
+      await createMessageIfPossible(firestore, EMoonPhase.FULL, currentDate)
     }
   }
 )

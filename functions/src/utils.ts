@@ -1,7 +1,6 @@
 import { differenceInHours, isDate } from 'date-fns'
 import { phase_hunt } from 'lune'
-import { EMoonPhase } from './types/EMoonPhase'
-import { IMessage } from './types/IMessage'
+import { TIME_RANGE_LEFT, TIME_RANGE_RIGHT } from './config'
 
 export const getMoonPhases = () => {
   const { nextnew_date, new_date, full_date } = phase_hunt()
@@ -20,17 +19,5 @@ export const isMoonDayClose = (moonDate: Date) => {
 
   const diffHours = differenceInHours(moonDate, new Date())
 
-  return diffHours > 6 && diffHours <= 36
-}
-
-export const createMessage = async (firestore: any, moonPhase: EMoonPhase) => {
-  const messageDoc: IMessage = {
-    message: generateMessage(moonPhase),
-  }
-
-  await firestore.collection('messages').add(messageDoc)
-}
-
-const generateMessage = (moonPhase: EMoonPhase) => {
-  return moonPhase + ' moon is coming'
+  return diffHours > TIME_RANGE_LEFT && diffHours <= TIME_RANGE_RIGHT
 }
