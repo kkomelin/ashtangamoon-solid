@@ -17,7 +17,7 @@ const useSW = () => {
         }, intervalMS)
 
       // eslint-disable-next-line prefer-template
-      console.log('SW Registered: ' + r)
+      console.log('SW Registered: ', r)
     },
     onRegisterError(error) {
       console.log('SW registration error', error)
