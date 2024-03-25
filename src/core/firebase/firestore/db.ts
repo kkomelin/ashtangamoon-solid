@@ -15,4 +15,5 @@ export type Schema = Typesaurus.Schema<typeof db>
 
 interface FcmToken {
   uid: string | undefined
+  createdAt: Date
 }
