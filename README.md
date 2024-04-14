@@ -11,17 +11,17 @@ _This project supersedes its previous [vanilla JS version](https://github.com/kk
 ## Install
 
 ```bash
-npm i
+pnpm i
 ```
 
 ## Develop
 
 ```bash
-npm run dev
+pnpm dev
 ```
 
 ## Build
 
 ```bash
-npm run build
+pnpm build
 ```
