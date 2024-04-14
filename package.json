@@ -1,6 +1,6 @@
 {
   "name": "ashtangamoon-solid",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "Allows to keep track of new and full moon days and visualizes current moon phase",
   "type": "module",
   "scripts": {
@@ -9,36 +9,36 @@
     "build:watch": "tsc && VITE_EMULATE=true PWA_DISABLE=true vite build --watch",
     "preview": "vite preview",
     "format": "prettier --write .",
-    "emulators": "npm run functions:build && GOOGLE_APPLICATION_CREDENTIALS='/home/kos/Desktop/projects/ashtangamoon-cbab049dea6e.json' firebase emulators:start",
-    "functions:build": "npm --prefix './functions' run build",
-    "functions:build:watch": "npm --prefix './functions' run build:watch",
+    "emulators": "pnpm run functions:build && GOOGLE_APPLICATION_CREDENTIALS='/home/kos/Desktop/projects/ashtangamoon-cbab049dea6e.json' firebase emulators:start",
+    "functions:build": "pnpm --prefix './functions' run build",
+    "functions:build:watch": "pnpm --prefix './functions' run build:watch",
     "deploy": "firebase deploy"
   },
   "dependencies": {
-    "@ark-ui/solid": "^2.0.1",
+    "@ark-ui/solid": "^2.2.0",
     "clsx": "^2.1.0",
-    "d3": "^7.8.5",
-    "date-fns": "^3.3.1",
-    "firebase": "^10.8.0",
+    "d3": "^7.9.0",
+    "date-fns": "^3.6.0",
+    "firebase": "^10.11.0",
     "lune": "^0.4.0",
-    "solid-js": "^1.8.14",
+    "solid-js": "^1.8.16",
     "solid-toast": "^0.5.0",
-    "typesaurus": "^10.1.0"
+    "typesaurus": "^10.6.0"
   },
   "devDependencies": {
     "@types/d3": "^7.4.3",
-    "autoprefixer": "^10.4.17",
-    "cssnano": "^6.0.3",
-    "postcss": "^8.4.35",
-    "postcss-import": "^16.0.0",
+    "autoprefixer": "^10.4.19",
+    "cssnano": "^6.1.2",
+    "postcss": "^8.4.38",
+    "postcss-import": "^16.1.0",
     "prettier": "^3.2.5",
-    "prettier-plugin-tailwindcss": "^0.5.11",
-    "tailwindcss": "^3.4.1",
-    "typescript": "^5.2.2",
-    "vite": "^5.1.1",
+    "prettier-plugin-tailwindcss": "^0.5.13",
+    "tailwindcss": "^3.4.3",
+    "typescript": "^5.4.5",
+    "vite": "^5.2.8",
     "vite-plugin-minify": "^1.5.2",
-    "vite-plugin-pwa": "^0.19.7",
-    "vite-plugin-solid": "^2.7.2",
+    "vite-plugin-pwa": "^0.19.8",
+    "vite-plugin-solid": "^2.10.2",
     "workbox-core": "^7.0.0",
     "workbox-precaching": "^7.0.0",
     "workbox-window": "^7.0.0"
@@ -59,5 +59,6 @@
     "ashtanga-yoga"
   ],
   "author": "Konstantin Komelin <konstantin.komelin@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "packageManager": "pnpm@8.15.4"
 }

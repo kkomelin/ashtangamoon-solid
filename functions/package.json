@@ -3,9 +3,9 @@
   "scripts": {
     "build": "tsc",
     "build:watch": "tsc --watch",
-    "serve": "npm run build && firebase emulators:start --only functions",
-    "shell": "npm run build && firebase functions:shell",
-    "start": "npm run shell",
+    "serve": "pnpm run build && firebase emulators:start --only functions",
+    "shell": "pnpm run build && firebase functions:shell",
+    "start": "pnpm run shell",
     "deploy": "firebase deploy --only functions",
     "logs": "firebase functions:log"
   },
@@ -23,5 +23,6 @@
     "firebase-functions-test": "^3.1.1",
     "typescript": "^5.4.3"
   },
-  "private": true
+  "private": true,
+  "packageManager": "pnpm@8.15.4"
 }
