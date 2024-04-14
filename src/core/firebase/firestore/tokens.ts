@@ -9,6 +9,7 @@ export const registerToken = async (
   try {
     await db.fcmTokens.set(currentToken, {
       uid,
+      createdAt: new Date(),
     })
 
     success('Subscribed successfully')

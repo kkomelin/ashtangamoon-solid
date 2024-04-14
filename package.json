@@ -37,7 +37,7 @@
     "typescript": "^5.2.2",
     "vite": "^5.1.1",
     "vite-plugin-minify": "^1.5.2",
-    "vite-plugin-pwa": "^0.17.4",
+    "vite-plugin-pwa": "^0.19.7",
     "vite-plugin-solid": "^2.7.2",
     "workbox-core": "^7.0.0",
     "workbox-precaching": "^7.0.0",
