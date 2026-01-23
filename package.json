@@ -1,6 +1,6 @@
 {
   "name": "ashtangamoon-solid",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "Allows to keep track of new and full moon days and visualizes current moon phase",
   "type": "module",
   "scripts": {
@@ -8,6 +8,7 @@
     "build": "tsc && vite build",
     "build:watch": "tsc && VITE_EMULATE=true PWA_DISABLE=true vite build --watch",
     "preview": "vite preview",
+    "typecheck": "tsc --noEmit && pnpm --prefix './functions' run typecheck",
     "format": "prettier --write .",
     "emulators": "pnpm run functions:build && GOOGLE_APPLICATION_CREDENTIALS='/home/kos/Desktop/projects/ashtangamoon-cbab049dea6e.json' firebase emulators:start",
     "functions:build": "pnpm --prefix './functions' run build",
@@ -26,14 +27,13 @@
     "typesaurus": "^10.7.0"
   },
   "devDependencies": {
+    "@tailwindcss/postcss": "^4.1.18",
     "@types/d3": "^7.4.3",
-    "autoprefixer": "^10.4.23",
     "cssnano": "^7.1.2",
     "postcss": "^8.5.6",
-    "postcss-import": "^16.1.1",
     "prettier": "^3.8.1",
     "prettier-plugin-tailwindcss": "^0.7.2",
-    "tailwindcss": "^3.4.19",
+    "tailwindcss": "^4.1.18",
     "typescript": "^5.9.3",
     "vite": "^7.3.1",
     "vite-plugin-minify": "^2.1.0",
@@ -60,5 +60,5 @@
   ],
   "author": "Konstantin Komelin <konstantin.komelin@gmail.com>",
   "license": "MIT",
-  "packageManager": "pnpm@8.15.4"
+  "packageManager": "pnpm@10.28.1"
 }

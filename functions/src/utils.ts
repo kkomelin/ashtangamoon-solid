@@ -13,7 +13,7 @@ export const getMoonPhases = () => {
 }
 
 export const isMoonDayClose = (moonDate: Date) => {
-  if (moonDate == null || !isDate(moonDate)) {
+  if (!moonDate || !isDate(moonDate)) {
     return false
   }
 

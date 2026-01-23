@@ -1,3 +1,4 @@
+import type { Firestore } from 'firebase-admin/firestore'
 import { subHours } from 'date-fns'
 import * as logger from 'firebase-functions/logger'
 import { TIME_RANGE_RIGHT } from './config'
@@ -5,7 +6,7 @@ import { EMoonPhase } from './types/EMoonPhase'
 import { IMessage } from './types/IMessage'
 
 export const createMessageIfPossible = async (
-  firestore: FirebaseFirestore.Firestore,
+  firestore: Firestore,
   moonPhase: EMoonPhase,
   currentDate: Date
 ) => {
@@ -19,7 +20,7 @@ export const createMessageIfPossible = async (
 }
 
 const createMessage = async (
-  firestore: FirebaseFirestore.Firestore,
+  firestore: Firestore,
   moonPhase: EMoonPhase,
   currentDate: Date
 ) => {
@@ -33,7 +34,7 @@ const createMessage = async (
 }
 
 const doesMessageExist = async (
-  firestore: FirebaseFirestore.Firestore,
+  firestore: Firestore,
   moonPhase: EMoonPhase,
   currentDate: Date
 ) => {
@@ -41,16 +42,10 @@ const doesMessageExist = async (
     .collection('messages')
     .where('createdAt', '>=', subHours(currentDate, TIME_RANGE_RIGHT))
     .where('type', '==', moonPhase)
+    .limit(1)
     .get()
 
-  let exists = false
-
-  snapshot.forEach((doc: FirebaseFirestore.DocumentData) => {
-    exists = true
-    return
-  })
-
-  return exists
+  return !snapshot.empty
 }
 
 const generateMessage = (moonPhase: EMoonPhase) => {

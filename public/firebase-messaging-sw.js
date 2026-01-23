@@ -1,5 +1,5 @@
-importScripts('/__/firebase/8.10.1/firebase-app.js')
-importScripts('/__/firebase/8.10.1/firebase-messaging.js')
+importScripts('/__/firebase/12.8.0/firebase-app-compat.js')
+importScripts('/__/firebase/12.8.0/firebase-messaging-compat.js')
 importScripts('/__/firebase/init.js?useEmulator=true')
 
 const messaging = firebase.messaging()

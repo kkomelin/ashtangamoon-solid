@@ -50,13 +50,13 @@ const useSW = () => {
             <div class="mt-3 flex flex-row items-center justify-start gap-3">
               <button
                 onClick={(e: MouseEvent) => handleInstall(e, t)}
-                class="rounded border border-gray-300 bg-gray-200 px-2 py-1 hover:bg-gray-300 focus:bg-gray-300"
+                class="rounded-sm border border-gray-300 bg-gray-200 px-2 py-1 hover:bg-gray-300 focus:bg-gray-300"
               >
                 Install
               </button>
               <button
                 onClick={(e: MouseEvent) => handleClose(e, t)}
-                class="rounded border border-gray-300 px-2 py-1 hover:bg-gray-200 focus:bg-gray-200"
+                class="rounded-sm border border-gray-300 px-2 py-1 hover:bg-gray-200 focus:bg-gray-200"
               >
                 Close
               </button>

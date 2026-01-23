@@ -5,6 +5,9 @@ import { APP_MACHINE_NAME } from '../../config/main'
 
 const app = initializeApp(FIREBASE_CONFIGURATION, APP_MACHINE_NAME)
 
-getAnalytics(app)
+// Only initialize analytics in production
+if (import.meta.env.PROD) {
+  getAnalytics(app)
+}
 
 export default app

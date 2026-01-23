@@ -73,14 +73,14 @@ function App() {
 
       {currentPhase() === undefined && <Loading />}
       <div>
-        <div class="current-date mb-6 text-center font-bold text-secondary">
+        <div class="current-date text-secondary mb-6 text-center font-bold">
           {currentDate()}
         </div>
 
         <svg id="moon" ref={moonRef} />
       </div>
       <footer class="mb-8 w-full">
-        <div class="mb-4 flex flex-col items-center justify-center text-primary sm:flex-row sm:gap-12">
+        <div class="text-primary mb-4 flex flex-col items-center justify-center sm:flex-row sm:gap-12">
           <Index each={dates()}>
             {(moonDate) => <MoonDate moonDate={moonDate()} />}
           </Index>

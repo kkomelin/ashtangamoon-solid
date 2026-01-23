@@ -1,9 +1,12 @@
 import * as admin from 'firebase-admin'
+import type { QueryDocumentSnapshot } from 'firebase-admin/firestore'
 import * as logger from 'firebase-functions/logger'
+import type { FirestoreEvent } from 'firebase-functions/v2/firestore'
 import {
   onDocumentCreated,
   onDocumentDeleted,
 } from 'firebase-functions/v2/firestore'
+import type { ScheduledEvent } from 'firebase-functions/v2/scheduler'
 import { onSchedule } from 'firebase-functions/v2/scheduler'
 import { createMessageIfPossible } from './db'
 import { EMoonPhase } from './types/EMoonPhase'
@@ -16,18 +19,18 @@ admin.initializeApp()
 
 export const subscribeToTopic = onDocumentCreated(
   'fcmTokens/{token}',
-  async (event) => {
+  async (event: FirestoreEvent<unknown, { token: string }>) => {
     const token = event.params.token
 
     try {
       const response = await admin.messaging().subscribeToTopic(token, TOPIC)
       if (response.failureCount > 0) {
-        response.errors.forEach((error) =>
+        response.errors.forEach((error) => {
           logger.error(
             'An error has occurred during subscribing to the topic',
             error
           )
-        )
+        })
         return
       }
 
@@ -46,7 +49,7 @@ export const subscribeToTopic = onDocumentCreated(
 
 export const unsubscribeFromTopic = onDocumentDeleted(
   'fcmTokens/{token}',
-  async (event) => {
+  async (event: FirestoreEvent<unknown, { token: string }>) => {
     const token = event.params.token
 
     try {
@@ -54,12 +57,12 @@ export const unsubscribeFromTopic = onDocumentDeleted(
         .messaging()
         .unsubscribeFromTopic(token, TOPIC)
       if (response.failureCount > 0) {
-        response.errors.forEach((error) =>
+        response.errors.forEach((error) => {
           logger.error(
             'An error has occurred during unsubscribing from the topic',
             error
           )
-        )
+        })
         return
       }
 
@@ -78,7 +81,7 @@ export const unsubscribeFromTopic = onDocumentDeleted(
 
 export const calculateMoonPhases = onSchedule(
   'every day 00:00',
-  async (event) => {
+  async (event: ScheduledEvent) => {
     const { newMoon, fullMoon, nextNewMoon } = getMoonPhases()
 
     const firestore = admin.firestore()
@@ -95,23 +98,29 @@ export const calculateMoonPhases = onSchedule(
 
 export const sendMessagesToTopic = onDocumentCreated(
   'messages/{messageId}',
-  async (event) => {
+  async (
+    event: FirestoreEvent<
+      QueryDocumentSnapshot | undefined,
+      { messageId: string }
+    >
+  ) => {
     const snapshot = event.data
-    if (snapshot == null) {
-      logger.error('No date is associated with the event')
+    if (!snapshot) {
+      logger.error('No data is associated with the event')
       return
     }
 
-    const message = snapshot.data() as IMessage
+    const messageData = snapshot.data() as IMessage
 
-    const payload = {
+    const message = {
       notification: {
         title: 'Ashtanga Moon',
-        body: message.message,
+        body: messageData.message,
       },
+      topic: TOPIC,
     }
 
-    await admin.messaging().sendToTopic(TOPIC, payload)
+    await admin.messaging().send(message)
 
     logger.log('A message has been sent successfully')
   }

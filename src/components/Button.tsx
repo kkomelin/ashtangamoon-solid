@@ -10,7 +10,7 @@ const Button = (props: IProps) => {
   return (
     <button
       class={c(
-        'flex cursor-pointer flex-row items-center justify-center gap-3 rounded border  px-3.5 py-2.5 text-primary',
+        'text-primary flex cursor-pointer flex-row items-center justify-center gap-3 rounded-sm border px-3.5 py-2.5',
         props.type === 'primary'
           ? 'border-primary text-primary'
           : 'border-quarteraly text-quarteraly'

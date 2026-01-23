@@ -86,6 +86,12 @@ export async function isSubscribed() {
 }
 
 export async function requestToken() {
+  // FCM doesn't work with Firebase emulators - skip in dev mode
+  if (import.meta.env.VITE_EMULATE === 'true') {
+    console.warn('FCM is disabled in emulator mode')
+    return null
+  }
+
   return await getToken(messaging, {
     vapidKey: PUBLIC_VAPID_KEY,
   })

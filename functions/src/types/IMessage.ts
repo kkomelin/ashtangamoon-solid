@@ -1,7 +1,7 @@
-import { EMoonPhase } from "./EMoonPhase"
+import { EMoonPhase } from './EMoonPhase'
 
 export interface IMessage {
   message: string
-  createdAt?:Date
+  createdAt?: Date
   type?: EMoonPhase
 }
