@@ -9,6 +9,7 @@ import { useAuth } from '../domains/auth'
 import { useOffline } from '../domains/offline'
 import Button from './Button'
 import Loading from './Loading'
+import LoadingIcon from './icons/LoadingIcon'
 import SubscribeIcon from './icons/SubscribeIcon'
 import UnsubscribeIcon from './icons/UnsubscribeIcon'
 
@@ -79,29 +80,34 @@ const SubscribeControl = () => {
   return (
     <div class="flex flex-row gap-1">
       <Show when={isUserSubscribed() !== undefined} fallback={<Loading />}>
-        <Show when={isLoading()} fallback={
-          <Show
-            when={isUserSubscribed() === true}
-            fallback={
-              <Button
-                type="primary"
-                onClick={handleSubscribeClick}
-                title="Subscribe"
-              >
-                <SubscribeIcon />
-              </Button>
-            }
-          >
+        <Show
+          when={isUserSubscribed() === true}
+          fallback={
             <Button
-              type="secondary"
-              onClick={handleUnsubscribeClick}
-              title="Unsubscribe"
+              type="primary"
+              onClick={handleSubscribeClick}
+              title="Subscribe"
+              disabled={isLoading()}
             >
-              <UnsubscribeIcon class="fill-quarteraly" />
+              <Show when={isLoading()} fallback={<SubscribeIcon />}>
+                <LoadingIcon />
+              </Show>
             </Button>
-          </Show>
-        }>
-          <Loading />
+          }
+        >
+          <Button
+            type="secondary"
+            onClick={handleUnsubscribeClick}
+            title="Unsubscribe"
+            disabled={isLoading()}
+          >
+            <Show
+              when={isLoading()}
+              fallback={<UnsubscribeIcon class="fill-quarteraly" />}
+            >
+              <LoadingIcon />
+            </Show>
+          </Button>
         </Show>
       </Show>
     </div>
