@@ -113,7 +113,7 @@ export const sendMessagesToTopic = onDocumentCreated(
     const messageData = snapshot.data() as IMessage
 
     const message = {
-      notification: {
+      data: {
         title: 'Ashtanga Moon',
         body: messageData.message,
       },

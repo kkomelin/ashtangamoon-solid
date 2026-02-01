@@ -10,11 +10,10 @@ messaging.onBackgroundMessage((payload) => {
     payload
   )
 
-  const notificationTitle =
-    payload?.notification?.title || 'Background Message Title'
+  const notificationTitle = payload?.data?.title || 'Ashtanga Moon'
 
   const notificationOptions = {
-    body: payload?.notification?.body || 'Background Message Body',
+    body: payload?.data?.body || 'A moon phase is coming',
     icon: '/img/android-chrome-192x192.png',
   }
 
