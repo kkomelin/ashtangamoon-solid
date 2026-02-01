@@ -4,7 +4,7 @@ import InfoIcon from './icons/InfoIcon'
 
 const InfoBox = () => (
   <Popover.Root portalled>
-    <Popover.Trigger class="absolute top-1 right-1 p-3 cursor-pointer">
+    <Popover.Trigger class="absolute top-1 right-1 cursor-pointer p-3">
       <span class="sr-only">Show Info</span>
       <InfoIcon class="fill-primary" />
     </Popover.Trigger>
@@ -17,8 +17,14 @@ const InfoBox = () => (
               to receive a push notification the day before full and new moon.
             </p>
             <p>
-              Even though the application is quite stable, it's under
-              development, so some functions and styles can change with time.
+              <a
+                href="https://komelin.com/#get-in-touch"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-tertiary underline hover:text-tertiary/80 transition-colors"
+              >
+                Contact author
+              </a>
             </p>
           </Popover.Description>
         </Popover.Content>
