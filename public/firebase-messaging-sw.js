@@ -5,10 +5,16 @@ importScripts('/__/firebase/init.js?useEmulator=true')
 const messaging = firebase.messaging()
 
 messaging.onBackgroundMessage((payload) => {
-  console.log(
-    '[firebase-messaging-sw.js] Received background message ',
-    payload
-  )
+  // Only log in development
+  if (
+    self.location.hostname === 'localhost' ||
+    self.location.hostname === '127.0.0.1'
+  ) {
+    console.log(
+      '[firebase-messaging-sw.js] Received background message ',
+      payload
+    )
+  }
 
   const notificationTitle = payload?.data?.title || 'Ashtanga Moon'
 

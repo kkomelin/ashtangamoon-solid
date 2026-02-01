@@ -4,7 +4,7 @@ import InfoIcon from './icons/InfoIcon'
 
 const InfoBox = () => (
   <Popover.Root portalled>
-    <Popover.Trigger class="absolute top-1 right-1 p-3">
+    <Popover.Trigger class="absolute top-1 right-1 p-3 cursor-pointer">
       <span class="sr-only">Show Info</span>
       <InfoIcon class="fill-primary" />
     </Popover.Trigger>

@@ -1,5 +1,12 @@
 import { onAuthStateChanged, User } from 'firebase/auth'
-import { createSignal, Index, onCleanup, onMount, Show } from 'solid-js'
+import {
+  createEffect,
+  createSignal,
+  Index,
+  onCleanup,
+  onMount,
+  Show,
+} from 'solid-js'
 import { Toaster } from 'solid-toast'
 import calculateMoonPhases from '../core/calculateMoonPhases'
 import auth from '../core/firebase/auth/init'
@@ -12,11 +19,15 @@ import ActionPanel from './ActionPanel'
 import InfoBox from './InfoBox'
 import Loading from './Loading'
 import MoonDate from './MoonDate'
+import OfflineIndicator from './OfflineIndicator'
+
+const REFRESH_INTERVAL_MS = 60 * 1000 // Refresh once a minute
 
 function App() {
   const [currentDate, setCurrentDate] = createSignal<string>(
     currentDateFormatted()
   )
+  const [lastCalculatedDate, setLastCalculatedDate] = createSignal<string>()
   const [dates, setDates] = createSignal<IMoonDate[]>([])
   const [currentPhase, setCurrentPhase] = createSignal<number>()
   const { user, setUser } = useAuth()
@@ -27,7 +38,15 @@ function App() {
   let renderInterval: NodeJS.Timeout
 
   const calculateDates = () => {
-    setCurrentDate(currentDateFormatted())
+    const newDate = currentDateFormatted()
+    setCurrentDate(newDate)
+
+    // Skip recalculation if date hasn't changed (memoization)
+    if (newDate === lastCalculatedDate()) {
+      return
+    }
+
+    setLastCalculatedDate(newDate)
 
     const { currentPhase, newMoon, fullMoon, nextNewMoon } =
       calculateMoonPhases()
@@ -46,17 +65,19 @@ function App() {
   onMount(() => {
     calculateDates()
 
-    // Refresh once a minute.
-    renderInterval = setInterval(calculateDates, 1 * 60 * 1000)
+    // Refresh at defined interval
+    renderInterval = setInterval(calculateDates, REFRESH_INTERVAL_MS)
 
     // Firebase Auth state change handler.
     onAuthStateChanged(auth, (user: User | null) => {
       setUser(user)
     })
+  })
 
-    // Visualize current moon phase.
+  // Re-render moon visualization when phase changes
+  createEffect(() => {
     const phase = currentPhase()
-    if (phase !== undefined) {
+    if (phase !== undefined && moonRef) {
       visualizeMoonPhase(moonRef, phase)
     }
   })
@@ -67,6 +88,7 @@ function App() {
 
   return (
     <>
+      <OfflineIndicator />
       <Show when={user() !== undefined}>
         <InfoBox />
       </Show>
@@ -77,7 +99,16 @@ function App() {
           {currentDate()}
         </div>
 
-        <svg id="moon" ref={moonRef} />
+        <svg
+          id="moon"
+          ref={moonRef}
+          role="img"
+          aria-label={
+            currentPhase() !== undefined
+              ? `Current moon phase: ${Math.round(currentPhase()! * 100)}% illuminated`
+              : 'Loading moon phase'
+          }
+        />
       </div>
       <footer class="mb-8 w-full">
         <div class="text-primary mb-4 flex flex-col items-center justify-center sm:flex-row sm:gap-12">

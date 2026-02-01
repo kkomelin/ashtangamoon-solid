@@ -14,7 +14,7 @@ export const registerToken = async (
 
     success('Subscribed successfully')
     return true
-  } catch (e: any) {
+  } catch (e: unknown) {
     error(e, userErrorMessage)
     return false
   }
@@ -29,7 +29,7 @@ export const unregisterToken = async (
 
     success('Unsubscribed successfully')
     return true
-  } catch (e: any) {
+  } catch (e: unknown) {
     error(e, userErrorMessage)
     return false
   }
@@ -43,7 +43,7 @@ export const isTokenRegistered = async (
     const token = await db.fcmTokens.get(currentToken)
 
     return token != null
-  } catch (e: any) {
+  } catch (e: unknown) {
     error(e, userErrorMessage)
     return false
   }

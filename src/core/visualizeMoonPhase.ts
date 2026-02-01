@@ -1,19 +1,22 @@
 import * as d3 from 'd3'
 
-const lightColor = '#ffffff'
-const darkColor = '#466380'
+const LIGHT_COLOR = '#ffffff'
+const DARK_COLOR = '#466380'
+const MOON_SVG_WIDTH = 300
+const MOON_SVG_HEIGHT = 100
+const MOON_RADIUS = 50
 
 function calculateParams(radius: number, phase: number) {
   const params = {
     first: {
       x: 0,
       shape: 'circle',
-      color: lightColor,
+      color: LIGHT_COLOR,
     },
     second: {
       x: 0,
       shape: 'circle',
-      color: darkColor,
+      color: DARK_COLOR,
     },
   }
 
@@ -23,21 +26,21 @@ function calculateParams(radius: number, phase: number) {
     params.second.shape = 'rect'
     params.second.x = -radius
   } else if (phase >= 0.255 && phase <= 0.5) {
-    params.first.color = darkColor
-    params.second.color = lightColor
+    params.first.color = DARK_COLOR
+    params.second.color = LIGHT_COLOR
     params.second.x = radius * 2 * (1 - phase) - radius
   } else if (phase > 0.5 && phase < 0.745) {
-    params.first.color = darkColor
-    params.second.color = lightColor
+    params.first.color = DARK_COLOR
+    params.second.color = LIGHT_COLOR
     params.second.x = -radius * 2 * phase + radius
   } else if (phase >= 0.745 && phase < 0.755) {
-    params.first.color = darkColor
-    params.second.color = lightColor
+    params.first.color = DARK_COLOR
+    params.second.color = LIGHT_COLOR
     params.second.shape = 'rect'
     params.second.x = -radius
   } else if (phase >= 0.755 && phase <= 1) {
-    params.first.color = lightColor
-    params.second.color = darkColor
+    params.first.color = LIGHT_COLOR
+    params.second.color = DARK_COLOR
     params.second.x = radius * 2 * (1 - phase)
   }
 
@@ -105,9 +108,9 @@ function renderMoon(
 }
 
 function visualizeMoonPhase(ref: SVGSVGElement, phase: number) {
-  const width = 300
-  const height = 100
-  const radius = 50
+  const width = MOON_SVG_WIDTH
+  const height = MOON_SVG_HEIGHT
+  const radius = MOON_RADIUS
   const initX = width / 2
   const initY = height / 2
 

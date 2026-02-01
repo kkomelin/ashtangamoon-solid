@@ -88,10 +88,12 @@ export const calculateMoonPhases = onSchedule(
 
     const currentDate = new Date()
 
-    if (isMoonDayClose(newMoon) || isMoonDayClose(nextNewMoon)) {
-      await createMessageIfPossible(firestore, EMoonPhase.NEW, currentDate)
+    if (isMoonDayClose(newMoon)) {
+      await createMessageIfPossible(firestore, EMoonPhase.NEW, currentDate, newMoon)
+    } else if (isMoonDayClose(nextNewMoon)) {
+      await createMessageIfPossible(firestore, EMoonPhase.NEW, currentDate, nextNewMoon)
     } else if (isMoonDayClose(fullMoon)) {
-      await createMessageIfPossible(firestore, EMoonPhase.FULL, currentDate)
+      await createMessageIfPossible(firestore, EMoonPhase.FULL, currentDate, fullMoon)
     }
   }
 )

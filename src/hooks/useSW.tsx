@@ -1,5 +1,6 @@
 import { createEffect } from 'solid-js'
 import toast, { Toast } from 'solid-toast'
+import { logger } from '../core/utils/logger'
 import { useRegisterSW } from 'virtual:pwa-register/solid'
 
 const intervalMS = 60 * 60 * 1000 // once an hour
@@ -17,7 +18,7 @@ const useSW = () => {
         }, intervalMS)
     },
     onRegisterError(error) {
-      console.log('SW registration error', error)
+      logger.error('SW registration error', error)
     },
   })
 
@@ -44,19 +45,21 @@ const useSW = () => {
         (t: Toast) => (
           <div>
             <div>
-              An application update is available. Click Instal to install the
+              An application update is available. Click Install to install the
               new version and reload the page.
             </div>
             <div class="mt-3 flex flex-row items-center justify-start gap-3">
               <button
                 onClick={(e: MouseEvent) => handleInstall(e, t)}
-                class="rounded-sm border border-gray-300 bg-gray-200 px-2 py-1 hover:bg-gray-300 focus:bg-gray-300"
+                class="rounded-sm border border-gray-300 bg-gray-200 px-2 py-1 transition-colors hover:bg-gray-300 focus:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-400"
+                aria-label="Install application update"
               >
                 Install
               </button>
               <button
                 onClick={(e: MouseEvent) => handleClose(e, t)}
-                class="rounded-sm border border-gray-300 px-2 py-1 hover:bg-gray-200 focus:bg-gray-200"
+                class="rounded-sm border border-gray-300 px-2 py-1 transition-colors hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-400"
+                aria-label="Close update notification"
               >
                 Close
               </button>

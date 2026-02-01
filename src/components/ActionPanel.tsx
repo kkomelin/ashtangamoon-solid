@@ -1,23 +1,17 @@
 import { Show, onMount } from 'solid-js'
-import toast from 'solid-toast'
 import { requestToken } from '../core/firebase/subscription'
 import { useAuth } from '../domains/auth'
-import { useOffline } from '../domains/offline'
 import AuthControl from './AuthControl'
 import SubscribeControl from './SubscribeControl'
 
 const ActionPanel = () => {
   const { user } = useAuth()
-  const { isOffline } = useOffline()
 
   onMount(async () => {
-    await requestToken()
-
-    if (isOffline()) {
-      toast(
-        "You're offline at the moment, so some features may not be available."
-      )
-      return
+    // Only request token if not in emulator mode
+    // The token will be automatically cached after first request
+    if (import.meta.env.VITE_EMULATE !== 'true') {
+      await requestToken()
     }
   })
 

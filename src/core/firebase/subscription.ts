@@ -1,5 +1,6 @@
 import { getToken } from 'firebase/messaging'
 import { PUBLIC_VAPID_KEY } from '../../config/keys'
+import { logger } from '../utils/logger'
 import { error } from '../utils/toasts'
 import auth from './auth/init'
 import {
@@ -88,7 +89,7 @@ export async function isSubscribed() {
 export async function requestToken() {
   // FCM doesn't work with Firebase emulators - skip in dev mode
   if (import.meta.env.VITE_EMULATE === 'true') {
-    console.warn('FCM is disabled in emulator mode')
+    logger.warn('FCM is disabled in emulator mode')
     return null
   }
 

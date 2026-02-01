@@ -1,5 +1,5 @@
 import type { Firestore } from 'firebase-admin/firestore'
-import { subHours } from 'date-fns'
+import { format, subHours } from 'date-fns'
 import * as logger from 'firebase-functions/logger'
 import { TIME_RANGE_RIGHT } from './config'
 import { EMoonPhase } from './types/EMoonPhase'
@@ -8,24 +8,26 @@ import { IMessage } from './types/IMessage'
 export const createMessageIfPossible = async (
   firestore: Firestore,
   moonPhase: EMoonPhase,
-  currentDate: Date
+  currentDate: Date,
+  moonDate: Date
 ) => {
   const exists = await doesMessageExist(firestore, moonPhase, currentDate)
   if (exists) {
     return
   }
 
-  await createMessage(firestore, moonPhase, currentDate)
+  await createMessage(firestore, moonPhase, currentDate, moonDate)
   logger.log(`A ${moonPhase} message has been created successfully`)
 }
 
 const createMessage = async (
   firestore: Firestore,
   moonPhase: EMoonPhase,
-  currentDate: Date
+  currentDate: Date,
+  moonDate: Date
 ) => {
   const messageDoc: IMessage = {
-    message: generateMessage(moonPhase),
+    message: generateMessage(moonPhase, moonDate),
     createdAt: currentDate,
     type: moonPhase,
   }
@@ -48,6 +50,7 @@ const doesMessageExist = async (
   return !snapshot.empty
 }
 
-const generateMessage = (moonPhase: EMoonPhase) => {
-  return moonPhase + ' moon is coming'
+const generateMessage = (moonPhase: EMoonPhase, moonDate: Date) => {
+  const formattedDate = format(moonDate, 'MMMM d, yyyy')
+  return `${moonPhase} moon is approaching on ${formattedDate}`
 }
